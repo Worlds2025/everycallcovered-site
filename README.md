@@ -12,7 +12,8 @@ The product itself lives in Worlds2025/pro-appliance-voice. This repo is only th
 
 - **Product visuals** (anything showing our app's screens) are only ever:
   1. real screenshots of the web console or Android app with demo data, or
-  2. HTML/CSS built from the real components, like the hero work order and the call page and inbox in the
+  2. HTML/CSS built from the real components, like the hero work order, the call page, the inbox and the home
+     screen ("Today's insights") in the
      "Every call lands as a job" section. Those use the console's own colors, type and tags. A feature not
      built yet (the job inbox) follows its design in the productization plan and is labeled as designed for
      launch.
