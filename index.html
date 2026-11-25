@@ -14,7 +14,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --night: #14244b;      /* after hours: the page's base */
@@ -125,6 +125,67 @@
   .features strong { display: block; font-size: 1.15rem; margin-bottom: .2rem; }
   .features span { color: var(--dim); }
 
+  /* Product visuals. Built from the web console's real components and design tokens
+     (artifacts/voice-console in pro-appliance-voice): same colors, type, tags and transcript bubbles.
+     The inbox follows the job design in the productization plan (section 2.3). No screenshots of
+     generated UI are used anywhere on this site. */
+  .product { background: var(--night-deep); }
+  .product .shots { margin-top: 2.8rem; display: grid; grid-template-columns: 1.08fr .92fr; gap: 2rem; align-items: start; }
+  .product figure { margin: 0; }
+  .product figcaption { margin-top: .8rem; font-size: .9rem; color: var(--dim); }
+  .ui {
+    --c-bg: hsl(38 33% 94%); --c-card: hsl(40 40% 97%); --c-fg: hsl(222 40% 16%); --c-primary: hsl(222 40% 20%);
+    --c-primary-fg: hsl(38 33% 96%); --c-border: hsl(34 20% 82%); --c-secondary: hsl(36 28% 88%);
+    --c-muted-fg: hsl(222 12% 42%); --c-accent: hsl(20 79% 57%); --c-bad: hsl(2 66% 48%);
+    background: var(--c-bg); color: var(--c-fg); border-radius: 14px; overflow: hidden;
+    font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 15px; line-height: 1.45;
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6); border: 1px solid rgba(255, 255, 255, .08);
+  }
+  .ui .bar { display: flex; align-items: center; gap: .45rem; padding: .7rem .9rem; background: hsl(222 40% 16%); }
+  .ui .bar i { width: .6rem; height: .6rem; border-radius: 50%; background: hsl(222 30% 30%); }
+  .ui .bar span { margin-left: .5rem; font: 500 .72rem "IBM Plex Mono", monospace; color: hsl(38 33% 80%); letter-spacing: .04em; }
+  .ui .body { padding: 1.3rem; }
+  .ui .mono { font-family: "IBM Plex Mono", monospace; }
+  .ui .kicker { font: 500 .7rem "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .2em; color: var(--c-accent); }
+  .ui .title { margin: .15rem 0 0; font-size: 1.75rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+  .ui .sub { margin-top: .25rem; font: .78rem "IBM Plex Mono", monospace; color: var(--c-muted-fg); }
+  .ui .head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .8rem; }
+  .ui .tags { display: flex; flex-wrap: wrap; gap: .35rem; align-content: flex-start; }
+  .ui .tag { display: inline-flex; align-items: center; gap: .35rem; border: 1px solid; border-radius: 999px; padding: .1rem .55rem;
+    font: 500 .66rem "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+  .ui .ok { background: hsl(158 35% 38% / .12); color: hsl(158 40% 28%); border-color: hsl(158 35% 38% / .3); }
+  .ui .bad { background: hsl(2 66% 48% / .1); color: var(--c-bad); border-color: hsl(2 66% 48% / .3); }
+  .ui .info { background: hsl(20 79% 57% / .1); color: hsl(20 70% 40%); border-color: hsl(20 79% 57% / .3); }
+  .ui .muted { background: var(--c-secondary); color: var(--c-muted-fg); border-color: var(--c-border); }
+  .ui .card { margin-top: 1rem; background: var(--c-card); border: 1px solid var(--c-border); border-radius: 12px; padding: 1rem 1.1rem; }
+  .ui .card-title { font-weight: 700; }
+  .ui .summary { margin: .35rem 0 0; color: var(--c-muted-fg); }
+  .ui dl { margin: .9rem 0 0; padding-top: .8rem; border-top: 1px solid var(--c-border); display: grid; grid-template-columns: 1fr 1fr; gap: .7rem 1rem; }
+  .ui dt { font: .64rem "IBM Plex Mono", monospace; text-transform: uppercase; color: var(--c-muted-fg); }
+  .ui dd { margin: .1rem 0 0; font-weight: 600; }
+  .ui dl .wide { grid-column: 1 / -1; }
+  .ui dl .wide dd { font-weight: 400; }
+  .ui .lines { margin-top: .8rem; display: grid; gap: .55rem; }
+  .ui .line { display: flex; gap: .6rem; align-items: flex-start; }
+  .ui .line time { width: 2.2rem; flex: none; padding-top: .3rem; font: .66rem "IBM Plex Mono", monospace; color: var(--c-muted-fg); }
+  .ui .line p { margin: 0; max-width: 82%; border-radius: 12px; padding: .45rem .75rem; font-size: .88rem; }
+  .ui .agent p { background: var(--c-primary); color: var(--c-primary-fg); }
+  .ui .caller { flex-direction: row-reverse; text-align: right; }
+  .ui .caller p { background: var(--c-secondary); }
+  .ui .inbox { margin-top: 1rem; background: var(--c-card); border: 1px solid var(--c-border); border-radius: 12px; overflow: hidden; }
+  .ui .job { padding: .95rem 1.05rem; border-bottom: 1px solid var(--c-border); }
+  .ui .job:last-child { border-bottom: 0; }
+  .ui .job-top { display: flex; justify-content: space-between; gap: .6rem; align-items: baseline; }
+  .ui .job-name { font-weight: 700; }
+  .ui .job-name .dot { display: inline-block; width: .45rem; height: .45rem; margin-left: .35rem; border-radius: 50%; background: var(--c-accent); vertical-align: middle; }
+  .ui .when { font: .68rem "IBM Plex Mono", monospace; color: var(--c-muted-fg); white-space: nowrap; }
+  .ui .job-what { margin: .2rem 0 .5rem; font-size: .88rem; color: var(--c-muted-fg); }
+  .ui .facts { display: flex; flex-wrap: wrap; gap: .35rem; }
+  .ui .actions { margin-top: .7rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+  .ui .btn { border-radius: 8px; padding: .32rem .75rem; font-size: .8rem; font-weight: 600; border: 1px solid var(--c-border); background: transparent; color: var(--c-fg); }
+  .ui .btn.primary { background: var(--c-primary); border-color: var(--c-primary); color: var(--c-primary-fg); }
+  .ui .slim { padding: .75rem 1.05rem; }
+
   footer { padding: 3rem 0 3.5rem; color: var(--dim); }
   footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
   footer b { color: var(--moon); }
@@ -142,6 +203,9 @@
     .ticket { justify-self: start; transform: rotate(1.2deg); }
     .steps { grid-template-columns: 1fr; gap: 1.8rem; }
     .features ul { grid-template-columns: 1fr; }
+    .product .shots { grid-template-columns: 1fr; }
+    .ui dl { grid-template-columns: 1fr; }
+    .ui .line p { max-width: 100%; }
     section { padding: 3.8rem 0; }
     .hero { padding: 2rem 0 3.8rem; }
   }
@@ -209,6 +273,85 @@
           <p>Confirm, assign or call back from the Android app or the web dashboard. You can take over a live call at any time.</p>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <section class="product" aria-labelledby="product">
+    <div class="wrap">
+      <h2 class="big" id="product">Every call lands as a job you can act on.</h2>
+      <div class="copy">
+        <p>Each call gets a page with a short summary, the details your trade needs, and the full transcript. New job requests, missed calls and messages collect in one inbox, where you confirm, edit, assign or decline with one tap.</p>
+      </div>
+      <div class="shots">
+        <figure>
+          <div class="ui" role="img" aria-label="Call page: Maria Gonzalez, refrigerator stopped cooling overnight, marked urgent, with summary and transcript">
+            <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>Calls › Maria Gonzalez</span></div>
+            <div class="body" aria-hidden="true">
+              <div class="head">
+                <div>
+                  <div class="kicker">Inbound call</div>
+                  <div class="title">Maria Gonzalez</div>
+                  <div class="sub">(202) 555-0101 · Nov 24, 8:30 PM · 1:58</div>
+                </div>
+                <div class="tags"><span class="tag ok">Completed</span><span class="tag ok">Ready</span></div>
+              </div>
+              <div class="card">
+                <div class="card-title">Summary</div>
+                <p class="summary">Whirlpool side-by-side stopped cooling overnight; food at risk. Wants the earliest visit, mornings preferred. Not under warranty.</p>
+                <dl>
+                  <div><dt>Appliance</dt><dd>Refrigerator</dd></div>
+                  <div><dt>Urgency</dt><dd><span class="tag bad">Urgent</span></dd></div>
+                  <div class="wide"><dt>Suggested action</dt><dd>Review the details and confirm a visit. Nothing was scheduled automatically.</dd></div>
+                </dl>
+              </div>
+              <div class="card">
+                <div class="card-title">Transcript</div>
+                <div class="lines">
+                  <div class="line agent"><time>0:06</time><p>Thanks for calling. How can I help you today?</p></div>
+                  <div class="line caller"><time>0:11</time><p>My Whirlpool fridge stopped cooling overnight. Everything in it is getting warm.</p></div>
+                  <div class="line agent"><time>0:19</time><p>I'm sorry to hear that. Is the freezer still cold, and is it still under warranty?</p></div>
+                  <div class="line caller"><time>0:27</time><p>The freezer is cold. No warranty, it's about eight years old.</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption>The call page in our web console, shown with demo data.</figcaption>
+        </figure>
+
+        <figure>
+          <div class="ui" role="img" aria-label="Job inbox with two jobs needing confirmation, a missed call and a message">
+            <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>Inbox</span></div>
+            <div class="body" aria-hidden="true">
+              <div class="kicker">Today</div>
+              <div class="title">Inbox</div>
+              <div class="inbox">
+                <div class="job">
+                  <div class="job-top"><span class="job-name">Maria Gonzalez<span class="dot"></span></span><span class="when">8:30 PM</span></div>
+                  <p class="job-what">Refrigerator stopped cooling overnight</p>
+                  <div class="facts"><span class="tag info">Needs confirmation</span><span class="tag bad">Urgent</span><span class="tag muted">Whirlpool</span><span class="tag muted">Mornings</span></div>
+                  <div class="actions"><span class="btn primary">Confirm</span><span class="btn">Edit</span><span class="btn">Assign</span><span class="btn">Decline</span></div>
+                </div>
+                <div class="job">
+                  <div class="job-top"><span class="job-name">Dave Patel<span class="dot"></span></span><span class="when">7:30 PM</span></div>
+                  <p class="job-what">Washer won't spin; clothes come out soaked</p>
+                  <div class="facts"><span class="tag info">Needs confirmation</span><span class="tag muted">LG</span><span class="tag muted">Store warranty</span><span class="tag muted">Afternoons</span></div>
+                  <div class="actions"><span class="btn primary">Confirm</span><span class="btn">Edit</span><span class="btn">Assign</span><span class="btn">Decline</span></div>
+                </div>
+                <div class="job slim">
+                  <div class="job-top"><span class="job-name">Robert Hayes</span><span class="when">5:30 PM</span></div>
+                  <div class="facts"><span class="tag muted">Missed call</span><span class="tag muted">Call back</span></div>
+                </div>
+                <div class="job slim">
+                  <div class="job-top"><span class="job-name">Grace Kim</span><span class="when">1:30 PM</span></div>
+                  <p class="job-what">“Is Thursday morning still open for the freezer?”</p>
+                  <div class="facts"><span class="tag muted">Message</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption>The job inbox, as designed for launch. Shown with demo data.</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
