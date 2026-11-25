@@ -80,7 +80,7 @@
   h3 { margin: 0 0 .4rem; font-size: var(--fs-1); font-weight: 800; line-height: 1.25; }
 
   /* Hero */
-  .hero { padding: var(--space-l) 0 var(--space-xl); }
+  .hero { padding: var(--space-l) 0 var(--space-xl); overflow-x: clip; } /* the landing work order starts tilted */
   .hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 3.5rem; align-items: center; }
   .lede { max-width: 34ch; font-size: var(--fs-1); line-height: 1.45; margin: 0 0 var(--space-m); }
   .launch { margin: 0; color: var(--amber); font-weight: 700; }
@@ -281,8 +281,8 @@
       <h2 class="big" id="pillars">Sounds like your office, works like your office.</h2>
       <div class="three">
         <div>
-          <h3>Sounds like your front desk</h3>
-          <p>A natural pace and short answers. It stops talking when a caller cuts in, slows down when someone is upset, and never says "as an AI". If a caller asks, it tells them it's your virtual assistant.</p>
+          <h3>Talks like a trained receptionist</h3>
+          <p>A natural pace and short answers. It stops talking when a caller cuts in, slows down when someone is upset, and never says “as an AI”. If a caller asks, it tells them it's your virtual assistant.</p>
         </div>
         <div>
           <h3>Tells you what your calls mean</h3>
@@ -320,7 +320,7 @@
     <div class="wrap">
       <h2 class="big" id="product">Each call lands as a job you can act on.</h2>
       <div class="copy">
-        <p>Each call gets a page with a short summary, the details your trade needs, and the full transcript. New job requests, missed calls and messages collect in one inbox, where you confirm, edit, assign or decline with one tap.</p>
+        <p>Each call gets a page with a short summary, the details your trade needs, and the full transcript. New job requests, callers to call back and messages collect in one inbox, where you confirm, edit, assign or decline with one tap.</p>
       </div>
       <div class="shots">
         <figure>
@@ -337,7 +337,7 @@
               </div>
               <div class="card">
                 <div class="card-title">Summary</div>
-                <p class="summary">The ice maker in her Whirlpool fridge stopped making ice. The fridge and water dispenser still work. Not under warranty. Mornings are best.</p>
+                <p class="summary">The ice maker in her Whirlpool fridge stopped making ice. The fridge and water dispenser still work. She says it isn't under warranty; the office confirms. Mornings are best.</p>
                 <dl>
                   <div><dt>Appliance</dt><dd>Refrigerator</dd></div>
                   <div><dt>Brand</dt><dd>Whirlpool</dd></div>
@@ -347,19 +347,19 @@
               <div class="card">
                 <div class="card-title">Transcript</div>
                 <div class="lines">
-                  <div class="line agent"><time>0:04</time><p>Thanks for calling Rivera Appliance, this is Rivera's virtual assistant. What's going on?</p></div>
+                  <div class="line agent"><time>0:04</time><p>This call may be recorded for training and business purposes. Thanks for calling Rivera Appliance. How can I help?</p></div>
                   <div class="line caller"><time>0:09</time><p>Hi, the ice maker in my Whirlpool fridge stopped making ice.</p></div>
-                  <div class="line agent"><time>0:15</time><p>That's a pain. Is the fridge itself still cold, and is it under warranty?</p></div>
-                  <div class="line caller"><time>0:21</time><p>The fridge is fine. No warranty, it's about eight years old.</p></div>
+                  <div class="line agent"><time>0:15</time><p>That's a pain. Is the fridge itself still cold?</p></div>
+                  <div class="line caller"><time>0:21</time><p>Yes, the fridge is fine. Just no ice.</p></div>
                 </div>
               </div>
             </div>
           </div>
-          <figcaption>The call page in our web console, shown with demo data.</figcaption>
+          <figcaption>The call page in the web dashboard, shown with demo data.</figcaption>
         </figure>
 
         <figure>
-          <div class="ui" role="img" aria-label="Inbox: two job requests to confirm, an unhappy caller to call back, a missed call and a message">
+          <div class="ui" role="img" aria-label="Inbox: two job requests to confirm, an unhappy caller to call back, a caller who hung up, and a message">
             <div class="bar" aria-hidden="true">Inbox</div>
             <div class="body" aria-hidden="true">
               <div class="kicker">Today</div>
@@ -384,7 +384,8 @@
                 </div>
                 <div class="job slim">
                   <div class="job-top"><span class="job-name">Robert Hayes</span><span class="when">5:51 PM</span></div>
-                  <div class="facts"><span class="tag muted">Missed call</span><span class="tag muted">Call back</span></div>
+                  <p class="job-what">Hung up before saying what he needed</p>
+                  <div class="facts"><span class="tag muted">Call back</span></div>
                 </div>
                 <div class="job slim">
                   <div class="job-top"><span class="job-name">Grace Kim</span><span class="when">1:07 PM</span></div>
@@ -405,7 +406,7 @@
       <div class="insights-copy">
         <h2 class="big" id="insights">Your calls, in a few plain lines.</h2>
         <div class="copy">
-          <p>Each call becomes a few plain lines: what they wanted, how it ended, how they felt. Your home screen turns that into today's short list, and every number opens the calls behind it.</p>
+          <p>Each call gets a short summary: what they wanted, how it ended, how they felt. Your home screen turns that into today's short list, and every number opens the calls behind it.</p>
           <p>Every Monday, a short digest of the week lands in your inbox.</p>
         </div>
       </div>
@@ -423,7 +424,7 @@
               </div>
               <div class="job slim">
                 <div class="job-top"><span class="job-name">Robert Hayes</span><span class="btn">Call back</span></div>
-                <p class="job-what">Missed call, no message</p>
+                <p class="job-what">Hung up before saying what he needed</p>
               </div>
               <div class="job slim">
                 <div class="job-top"><span class="job-name">Maria Gonzalez<span class="dot"></span></span><span class="btn primary">Confirm</span></div>
@@ -438,7 +439,7 @@
             <div class="inbox">
               <div class="job slim">
                 <div class="job-top"><span class="label">Top requests</span><span class="when">12 calls today</span></div>
-                <div class="rows"><span>Dryer not heating</span><b>3</b><span>Fridge or freezer not cooling</span><b>2</b><span>Washer won't spin</span><b>2</b></div>
+                <div class="rows"><span>Dryer not heating</span><b>3</b><span>Fridge not cooling</span><b>2</b><span>Washer not spinning</span><b>2</b></div>
               </div>
               <div class="job slim">
                 <div class="job-top"><span class="label">Didn't book</span><span class="when">3 calls</span></div>
@@ -469,7 +470,7 @@
         <li>No heat in winter</li>
         <li>Roof leaking into the house</li>
         <li>Water pouring from an appliance</li>
-        <li>Gas smell<small>Callers are told to get out and call for help first.</small></li>
+        <li>Gas smell<small>Callers are told to leave the building and call 911. Nothing gets booked.</small></li>
       </ul>
     </div>
   </section>
