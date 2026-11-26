@@ -13,13 +13,27 @@ The product itself lives in Worlds2025/pro-appliance-voice. This repo is only th
 
 ## The app's address
 
-Every sign-up, demo and sign-in link takes the app's address from one tag in `index.html`:
+Every sign-up, demo and sign-in link (`data-app`) points at the app's sign-in page, which also signs new people up:
 
 ```html
 <meta name="ecc-app-url" content="https://every-call-covered.replit.app/sign-in">
 ```
 
-Change that one value (for example to `https://app.everycallcovered.com/sign-in`) and every button follows.
+The links carry the address in their own `href` too, so they work without JavaScript, and `assets/site.js` keeps them
+in step with the tag. To move the app (for example to `https://app.everycallcovered.com/sign-in`), replace the
+address everywhere in `index.html`.
+
+## Without JavaScript
+
+The page reads in full without JavaScript. The call player shows the repair call as it ends: the transcript and the
+inbox in `index.html` are a copy of what `assets/site.js` draws for that call, and the controls that need the script
+are hidden. If you change the repair call in `site.js`, update that copy to match.
+
+## Sharing and icons
+
+- `assets/og-image.png` (1200 x 630) is a screenshot of the top of this page, used by Open Graph and Twitter cards.
+  Retake it if the hero changes.
+- `favicon.svg`, `favicon.ico` and `apple-touch-icon.png` are the brand mark: the navy phone on amber.
 
 ## Prices
 

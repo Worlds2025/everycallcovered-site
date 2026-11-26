@@ -58,8 +58,8 @@
       <a href="#questions">Questions</a>
     </nav>
     <div class="head-actions">
-      <a class="signin" data-app href="#get-started">Sign in</a>
-      <a class="btn small" data-app href="#get-started"><span class="wide-only">Get a demo call</span><span class="narrow-only">Demo call</span></a>
+      <a class="signin" data-app href="https://every-call-covered.replit.app/sign-in">Sign in</a>
+      <a class="btn small" data-app href="https://every-call-covered.replit.app/sign-in"><span class="wide-only">Get a demo call</span><span class="narrow-only">Demo call</span></a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
@@ -70,7 +70,7 @@
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
       <a href="#questions">Questions</a>
-      <a data-app href="#get-started">Sign in</a>
+      <a data-app href="https://every-call-covered.replit.app/sign-in">Sign in</a>
     </div>
   </nav>
 </header>
@@ -123,27 +123,27 @@
       </div>
 
       <div class="stage" id="stage" role="tabpanel" aria-labelledby="tab-repair">
-        <div class="line" id="line" data-state="idle">
+        <div class="line" id="line" data-state="ended">
           <div class="line-head">
-            <span class="line-state"><span class="led" aria-hidden="true"></span><span id="line-state">Waiting for a call</span></span>
-            <span class="line-who" id="line-who">Rivera Appliance</span>
-            <span class="line-num" id="line-num">Your business line</span>
-            <span class="clock" id="clock" aria-hidden="true">0:00</span>
+            <span class="line-state"><span class="led" aria-hidden="true"></span><span id="line-state">Call ended</span></span>
+            <span class="line-who" id="line-who">Answered by your receptionist</span>
+            <span class="line-num" id="line-num">(781) 555-0123</span>
+            <span class="clock" id="clock" aria-hidden="true">0:48</span>
             <span class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-            <span class="now" aria-hidden="true"><span class="bar"><i id="line-progress"></i></span><span id="now-chapter"></span></span>
+            <span class="now" aria-hidden="true"><span class="bar"><i id="line-progress" style="width: 100%"></i></span><span id="now-chapter">Lands in your app</span></span>
           </div>
-          <div class="transcript" id="transcript" role="log" aria-live="off" aria-label="Transcript" tabindex="0"></div>
+          <div class="transcript resolved" id="transcript" role="log" aria-live="off" aria-label="Transcript" tabindex="0"><div class="msg r"><span class="who">Receptionist, 0:02</span><p>This call may be recorded for training and business purposes. Thanks for calling Rivera Appliance. How can I help you today?</p></div><div class="msg c"><span class="who">Caller, 0:09</span><p>Hi, my <span class="k">Bosch dishwasher isn't draining</span>. There's water sitting in the bottom after every cycle.</p></div><div class="msg r"><span class="who">Receptionist, 0:15</span><p>Sorry about that. I can get a technician out to look at it. Can I get your name and a good number to reach you?</p></div><div class="msg c"><span class="who">Caller, 0:23</span><p><span class="k">Linda Chen</span>, <span class="k">781-555-0123</span>.</p></div><div class="msg r"><span class="who">Receptionist, 0:27</span><p>Thanks, Linda. What's the address for the visit?</p></div><div class="msg c"><span class="who">Caller, 0:30</span><p><span class="k">27 Birch Lane</span> in Springfield.</p></div><div class="msg r"><span class="who">Receptionist, 0:33</span><p>Got it, 27 Birch Lane. Is a morning or an afternoon better for you?</p></div><div class="msg c"><span class="who">Caller, 0:38</span><p><span class="k">Thursday morning</span> would be great.</p></div><div class="msg r"><span class="who">Receptionist, 0:41</span><p>I have that down for Thursday morning. The office will confirm the visit with you.</p></div><div class="msg c"><span class="who">Caller, 0:46</span><p>Perfect, thanks.</p></div></div>
           <button class="ghost to-app" id="to-app" type="button">See where it landed in the app</button>
         </div>
 
-        <div class="app" id="app" role="region" aria-label="The app">
+        <div class="app" id="app" role="region" aria-label="The app" tabindex="-1">
           <aside class="app-side" aria-hidden="true">
             <div class="biz" id="app-biz">Rivera Appliance<small>Every Call Covered</small></div>
-            <ul id="app-nav"></ul>
+            <ul id="app-nav"><li>Today</li><li class="on">Inbox</li><li>Live calls</li><li>Phone</li><li>Calls</li><li>Repairs</li><li>Team chat</li><li>Settings</li></ul>
           </aside>
           <div>
             <div class="app-top" aria-hidden="true"><span id="app-biz-top">Rivera Appliance<small>Every Call Covered</small></span></div>
-            <div class="app-main" id="app-main"></div>
+            <div class="app-main" id="app-main"><div class="app-title"><div><h3>Inbox</h3><p class="sub">Calls to return and requests to confirm.</p></div></div> <p class="app-crumb">2 repair requests to confirm. Confirming never texts the customer.</p> <div class="panel inbox-row"> <div class="top"><span class="name">Linda Chen</span><span class="when">Nov 24, 7:16 PM</span></div> <p class="desc">Bosch dishwasher isn't draining. Water left in the bottom after every cycle.</p> <div class="tags"><span class="tag " style="animation:arrive .45s 0.25s var(--ease-out) both">Needs confirmation</span><span class="tag " style="animation:arrive .45s 0.43s var(--ease-out) both">Bosch</span><span class="tag " style="animation:arrive .45s 0.61s var(--ease-out) both">27 Birch Lane</span><span class="tag " style="animation:arrive .45s 0.79s var(--ease-out) both">Thursday morning</span></div> </div><div class="panel inbox-row"> <div class="top"><span class="name">Robert Hayes</span><span class="when">Nov 22, 8:50 AM</span></div> <p class="desc">Dryer runs but no heat.</p> <div class="tags"><span class="tag ">Needs confirmation</span><span class="tag ">Whirlpool</span><span class="tag ">Mornings</span></div> </div></div>
           </div>
         </div>
       </div>
@@ -290,7 +290,7 @@
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>2 sign-ins</span></li>
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Extra sign-ins $10 a month each</span></li>
             </ul>
-            <a class="btn quiet" data-app href="#get-started">Get a demo call</a>
+            <a class="btn quiet" data-app href="https://every-call-covered.replit.app/sign-in">Get a demo call</a>
           </div>
           <div class="plan">
             <h4>Growth</h4>
@@ -302,7 +302,7 @@
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>5 sign-ins</span></li>
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Extra sign-ins $10 a month each</span></li>
             </ul>
-            <a class="btn quiet" data-app href="#get-started">Get a demo call</a>
+            <a class="btn quiet" data-app href="https://every-call-covered.replit.app/sign-in">Get a demo call</a>
           </div>
         </div>
       </div>
@@ -316,7 +316,7 @@
       </div>
       <div>
         <label for="minutes">Call minutes in a month <output class="minutes" id="minutes-out" for="minutes">60</output></label>
-        <input class="range" type="range" id="minutes" min="0" max="800" step="10" value="60">
+        <input class="range" type="range" id="minutes" min="0" max="800" step="10" value="60" aria-valuetext="60 minutes" style="--fill: 7.5%">
         <div class="range-scale" aria-hidden="true"><span>0</span><span>400</span><span>800</span></div>
         <ul class="totals" id="totals">
           <li data-plan="personal"><span class="p">Personal</span><span class="v">$38.99</span><span class="why">$11.99 plus 60 minutes of credit</span></li>
@@ -379,8 +379,8 @@
     <h2 id="closer-title">Hear it answer your phone.</h2>
     <p>Sign up, answer a few questions about how your calls should go, and the demo rings your phone. You play the customer.</p>
     <div class="ctas">
-      <a class="btn" data-app href="#get-started" id="closer-cta"><svg aria-hidden="true"><use href="#i-phone"/></svg>Get a demo call</a>
-      <a class="link" data-app href="#get-started">Already signed up? Sign in</a>
+      <a class="btn" data-app href="https://every-call-covered.replit.app/sign-in" id="closer-cta"><svg aria-hidden="true"><use href="#i-phone"/></svg>Get a demo call</a>
+      <a class="link" data-app href="https://every-call-covered.replit.app/sign-in">Already signed up? Sign in</a>
     </div>
   </div>
 </section>
@@ -400,7 +400,7 @@
         <li><a href="#features">Features</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#questions">Questions</a></li>
-        <li><a data-app href="#get-started">Sign in</a></li>
+        <li><a data-app href="https://every-call-covered.replit.app/sign-in">Sign in</a></li>
       </ul>
     </nav>
   </div>

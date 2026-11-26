@@ -580,3 +580,14 @@ h1, h2, h3 { margin: 0; text-wrap: balance; }
 .me-more .link { color: var(--amber); }
 .btn.quiet { --btn-bg: transparent; --btn-fg: var(--moon); box-shadow: inset 0 0 0 1.5px rgba(242, 169, 59, .75); }
 .btn.quiet:hover { --btn-bg: rgba(242, 169, 59, .12); }
+
+/* Without JavaScript: the call player shows the repair call as it ends, with no controls that do nothing */
+html:not(.js) .menu-btn, html:not(.js) .player-bar, html:not(.js) .chapters, html:not(.js) .line .to-app,
+html:not(.js) .js-only, html:not(.js) .range, html:not(.js) .range-scale { display: none; }
+html:not(.js) .calc .totals { margin-top: 1rem; }
+.app-main + .app-sizer { position: absolute; inset: 0 0 auto; visibility: hidden; pointer-events: none; }
+.app > div:last-child { position: relative; min-width: 0; }
+/* Room for the longest label in every state, so switching calls or states never moves the page */
+#now-chapter { line-height: 1.5; min-height: 1.5em; }
+@media (max-width: 639px) { .line-who { min-height: 2.5em; } }
+@media (min-width: 960px) { .chapter-list .l { min-height: 2.5em; } }
