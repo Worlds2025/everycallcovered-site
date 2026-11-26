@@ -47,7 +47,7 @@
       const m = Number(range.value);
       out.textContent = m.toLocaleString("en-US");
       range.setAttribute("aria-valuetext", `${m} minutes`);
-      range.style.setProperty("--fill", (m / Number(range.max)) * 100 + "%");
+      range.style.setProperty("--p", String(m / Number(range.max)));
       const totals = {};
       for (const [id, p] of Object.entries(PRICES)) {
         const over = Math.max(0, m - p.included);
@@ -93,6 +93,9 @@
       timer = setTimeout(() => set("Nina Brooks answered on the app.", "On the call: Nina Brooks, on the app", [again()]), 1600);
     };
     start();
+    const callClock = $("#live-card .right .num");
+    let secs = 185;
+    if (callClock) setInterval(() => { secs++; callClock.textContent = `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, "0")}`; }, 1000);
   }
 
   // ---- The call player ----
@@ -109,7 +112,7 @@
       : `<span class="tag ok"><span class="dot"></span>Live</span>`;
     if (ended) return "";
     return `<div class="panel live-card">
-      <div class="top"><span class="who"><svg aria-hidden="true"><use href="#i-user"/></svg><span class="caller-num">${num}</span></span>
+      <div class="top"><span class="who"><svg aria-hidden="true"><use href="#i-user"/></svg><span class="caller-num">${num.replace(/ (\S+)$/, ' <span class="nw">$1</span>')}</span></span>
       <span class="right"><span class="num" data-clock>0:00</span>${tag}</span></div>
       <p class="meta"><svg aria-hidden="true"><use href="#i-phone"/></svg>${state === "ringing" ? "Incoming call" : "On the call: your receptionist"}</p></div>`;
   };
@@ -132,8 +135,8 @@
     ${rows.map(inboxRow).join("")}`;
 
   const tiles = screened => `<div class="tiles">
-      <div><b>3</b><span>Messages</span></div>
-      <div><b class="${screened > 1 ? "fresh-num" : ""}">${screened}</b><span>Screened out</span></div>
+      <div><b>1</b><span>Messages</span></div>
+      <div><b class="${screened ? "fresh-num" : ""}">${screened}</b><span>Screened out</span></div>
       <div><b>1</b><span>Got through</span></div>
       <div><b>0</b><span>Urgent</span></div></div>`;
   const meRows = `
@@ -146,7 +149,7 @@
 
   const SCENARIOS = {
     repair: {
-      biz: "Rivera Appliance", nav: BIZ_NAV, navOn: "Inbox", lineName: "Rivera Appliance", lineSub: "Your business line", answeredBy: "Answered by your receptionist",
+      biz: "Rivera Appliance", nav: BIZ_NAV, navOn: "Inbox", lineName: "Rivera Appliance", lineSub: "Your business line", answeredBy: "Your receptionist",
       num: "(781) 555-0123",
       chapters: ["Rings", "Answers in your name", "Hears the problem", "Takes the details", "Offers a time", "Lands in your app"],
       steps: [
@@ -175,7 +178,7 @@
       }, ROBERT], 2),
     },
     emergency: {
-      biz: "Rivera Appliance", nav: BIZ_NAV, navOn: "Inbox", lineName: "Rivera Appliance", lineSub: "Your business line, after hours", answeredBy: "Answered by your receptionist",
+      biz: "Rivera Appliance", nav: BIZ_NAV, navOn: "Inbox", lineName: "Rivera Appliance", lineSub: "Your business line, after hours", answeredBy: "Your receptionist",
       num: "(781) 555-0105",
       chapters: ["Rings", "Answers in your name", "Hears an emergency", "Safety step first", "Checks it's happening now", "Takes the details", "Calls your on-call person"],
       steps: [
@@ -192,24 +195,24 @@
         { t: 53, ch: 5, who: "c", text: "Thank you." },
         { t: 55, ch: 6, end: true },
         { t: 56, ch: 6, sys: "Calling <strong>Ana Rivera</strong>, first on call" },
-        { t: 70, ch: 6, sys: "Ana Rivera pressed 1 and is calling Carlos back" },
+        { t: 70, ch: 6, sys: "Ana Rivera pressed 1 and is calling Carlos back", answered: true },
       ],
-      during: state => inboxPage(liveCard("(781) 555-0105", state), [{ ...LINDA, tags: [["Needs confirmation"], ["Bosch"], ["Thursday morning"]] }], 1),
-      after: () => inboxPage("", [{
+      during: state => inboxPage(liveCard("(781) 555-0105", state), [LINDA], 1),
+      after: (answered = false) => inboxPage("", [{
         name: "Carlos Romero", when: "Nov 24, 10:12 PM", alarm: true, isNew: true,
         desc: "Washer leaking onto the laundry room floor. He couldn't reach the shut-off valve.",
         tags: [["Emergency", "alarm"], ["14 Elm Street"]],
         extra: `<ul class="oncall" aria-label="On-call list">
-          <li><span class="p">Ana Rivera</span><span class="s">Called at 10:13 PM</span><span class="tag ok">Pressed 1</span></li>
-          <li><span class="p">Marcus Lee</span><span class="s">Next on the list</span><span class="tag">Not needed</span></li></ul>`,
+          <li><span class="p">Ana Rivera</span><span class="s">${answered ? "Called at 10:13 PM" : "Calling now"}</span>${answered ? `<span class="tag ok">Pressed 1</span>` : `<span class="tag"><span class="dot"></span>Ringing</span>`}</li>
+          <li><span class="p">Marcus Lee</span><span class="s">Next on the list</span><span class="tag">${answered ? "Not needed" : "Waiting"}</span></li></ul>`,
         actions: [
           ["Call (781) 555-0105", "In your app, this calls Carlos from your business number."],
           ["Open the call", "In your app, this opens the transcript and recording."],
         ],
-      }, { ...LINDA, tags: [["Needs confirmation"], ["Bosch"], ["Thursday morning"]] }], 1),
+      }, LINDA], 1),
     },
     scam: {
-      biz: "Grace Kim", nav: ME_NAV, navOn: "Today", lineName: "Grace Kim", lineSub: "Your phone, Personal plan", answeredBy: "Answered by your assistant",
+      biz: "Grace Kim", nav: ME_NAV, navOn: "Today", lineName: "Grace Kim", lineSub: "Your phone, Personal plan", answeredBy: "Your assistant",
       num: "(857) 555-0190",
       chapters: ["Rings", "Answers as your assistant", "Asks which company", "Spots the scam", "Ends the call", "Notes it for you"],
       steps: [
@@ -221,9 +224,9 @@
         { t: 21, ch: 4, who: "r", text: "I can't help with that. I'll pass on a message, and Grace will call back on a number she already has. Goodbye." },
         { t: 28, ch: 5, end: true },
       ],
-      during: () => todayPage(1),
-      after: () => todayPage(2, `<div class="landing arrive">
-          <div class="mini-row"><span class="n num">(857) 555-0190</span><span class="tag warn">Suspected scam</span><span class="d">Said your car warranty is expiring and asked for your card number. Your assistant ended the call.</span></div>
+      during: () => todayPage(0),
+      after: () => todayPage(1, `<div class="landing arrive">
+          <div class="mini-row"><span class="n num">(857) <span class="nw">555-0190</span></span><span class="tag warn">Suspected scam</span><span class="d">Said your car warranty is expiring and asked for your card number. Your assistant ended the call.</span></div>
           <div class="scam-box"><h4><svg aria-hidden="true"><use href="#i-shield"/></svg>This looks like a scam</h4>
             <p>Don't call back on a number this caller gave. If you already paid them, call your bank or card company and ask for a chargeback.</p>
             <div class="app-actions"><button type="button" class="app-btn outline" data-note="In your app, this number would now be turned away.">Add to "Never answer"</button></div>
@@ -239,7 +242,8 @@
   const tabs = $$('[role="tab"]', player);
 
   let sc = SCENARIOS.repair, scId = "repair";
-  let token = 0, stepIndex = 0, status = "idle", started = false, bubble = null;
+  let token = 0, status = "idle", started = false, bubble = null, bubbleStep = -1, sizedAt = 0;
+  let resume = { index: 0, word: 0 }; // where Resume picks up: a step, and how many of its words already show
   const total = () => sc.steps.find(s => s.end).t;
   const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
   const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -328,6 +332,7 @@
     if (line.dataset.state !== "live" && !step.sys) { setLine("live"); setApp(sc.during("live")); }
     const el = addBubble(step);
     if (!step.sys) $("p", el).innerHTML = html(words(step.text), Infinity);
+    if (step.answered) setApp(sc.after(true));
   };
 
   const finish = animate => {
@@ -338,10 +343,12 @@
     announce.textContent = "The call ended and landed in the app.";
   };
 
-  async function play(step, tok) {
-    const next = sc.steps[sc.steps.indexOf(step) + 1];
+  async function play(index, tok, fromWord) {
+    const step = sc.steps[index], next = sc.steps[index + 1];
     const span = next ? next.t - step.t : 0;
     const alive = () => tok === token;
+    const done = () => { resume = { index: index + 1, word: 0 }; };
+    resume = { index, word: 0 };
     setChapter(step.ch);
     if (step.ring) {
       setLine("ringing"); setApp(sc.during("ringing"), true); setClock(0);
@@ -350,21 +357,24 @@
       return;
     }
     if (step.end) {
-      setClock(step.t); finish(true);
+      setClock(step.t); finish(true); done();
       await sleep(900);
       return;
     }
     if (step.sys) {
-      bubble = addBubble(step);
+      addBubble(step);
+      if (step.answered) setApp(sc.after(true));
+      done();
       await sleep(1700);
       return;
     }
     if (line.dataset.state !== "live") { setLine("live"); setApp(sc.during("live"), true); }
-    bubble = addBubble(step);
-    const p = $("p", bubble);
     const list = words(step.text);
     const quick = reduceMotion.matches;
-    if (step.who === "r" && !quick) {
+    const carryOn = fromWord > 0 && bubble && bubbleStep === index;
+    if (!carryOn) { bubble = addBubble(step); bubbleStep = index; fromWord = 0; }
+    const p = $("p", bubble);
+    if (step.who === "r" && !quick && !carryOn) {
       p.classList.add("typing"); p.innerHTML = "<i></i><i></i><i></i>";
       await sleep(650);
       if (!alive()) return;
@@ -376,27 +386,29 @@
     if (quick) {
       p.innerHTML = html(list, n);
       setClock(next ? next.t : step.t);
+      done();
       await sleep(Math.min(2600, 600 + n * 70));
     } else {
-      for (let i = 1; i <= n; i++) {
+      for (let i = fromWord + 1; i <= n; i++) {
         if (!alive()) return;
         p.innerHTML = html(list, i);
+        resume = { index, word: i };
         setClock(step.t + (span * i) / n);
         transcript.scrollTop = transcript.scrollHeight;
         await sleep(list[i - 1].w.trim() ? perWord : 0);
       }
+      done();
     }
     delete line.dataset.speaking;
     await sleep(380);
   }
 
-  async function run(from) {
+  async function run(from, fromWord = 0) {
     const tok = ++token;
     started = true;
     setPlayButton("playing");
-    for (stepIndex = from; stepIndex < sc.steps.length; stepIndex++) {
-      bubble = null;
-      await play(sc.steps[stepIndex], tok);
+    for (let i = from; i < sc.steps.length; i++) {
+      await play(i, tok, i === from ? fromWord : 0);
       if (tok !== token) return;
     }
     setPlayButton("ended");
@@ -412,7 +424,7 @@
     setClock(0);
     setApp(sc.during("idle"));
     setChapter(-1);
-    stepIndex = 0;
+    resume = { index: 0, word: 0 }; bubble = null; bubbleStep = -1;
     setPlayButton("idle");
   };
 
@@ -449,6 +461,7 @@
       const t = sc.steps.find(s => s.ch === i).t;
       return `<li><button type="button" data-ch="${i}"><span class="t">${fmt(t)}</span><span class="l">${label}</span></button></li>`;
     }).join("");
+    sizedAt = 0; fitApp();
     reset();
     if (autoplay && !reduceMotion.matches) run(0);
     else if (reduceMotion.matches) showAll();
@@ -467,11 +480,13 @@
   playBtn.addEventListener("click", () => {
     if (status === "playing") {
       token++;
-      if (bubble && stepIndex < sc.steps.length) bubble.remove();
+      // A line still at its typing dots goes; a half-said line stays and carries on from the same word.
+      if (bubble && bubbleStep === resume.index && resume.word === 0) { bubble.remove(); bubble = null; bubbleStep = -1; }
       delete line.dataset.speaking;
+      if (resume.index >= sc.steps.length) { setPlayButton("ended"); return; }
       setPlayButton("paused");
     } else if (status === "paused") {
-      run(stepIndex);
+      run(resume.index, resume.word);
     } else {
       reset();
       run(0);
@@ -493,21 +508,18 @@
   sizer.setAttribute("aria-hidden", "true");
   sizer.inert = true;
   appMain.after(sizer);
-  let sizedAt = 0;
-  const fitApp = () => {
+  function fitApp() {
     const w = appMain.clientWidth;
     if (!w || w === sizedAt) return;
     sizedAt = w;
     let h = 0;
-    for (const s of Object.values(SCENARIOS)) {
-      for (const view of [s.during("idle"), s.during("ringing"), s.during("live"), s.after()]) {
-        sizer.innerHTML = view;
-        h = Math.max(h, sizer.offsetHeight);
-      }
+    for (const view of [sc.during("idle"), sc.during("ringing"), sc.during("live"), sc.after(), sc.after(true)]) {
+      sizer.innerHTML = view;
+      h = Math.max(h, sizer.offsetHeight);
     }
     sizer.innerHTML = "";
     appMain.style.minHeight = Math.ceil(h) + "px";
-  };
+  }
   fitApp();
   if ("ResizeObserver" in window) new ResizeObserver(fitApp).observe(stage);
   document.fonts?.ready.then(() => { sizedAt = 0; fitApp(); });
