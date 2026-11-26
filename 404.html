@@ -2,47 +2,33 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Page not found: Every Call Covered</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#14244b">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
-<style>
-  :root { --night: #14244b; --amber: #f2a93b; --moon: #e7ecf8; --dim: #a9b4d3; }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; min-height: 100vh; display: flex; flex-direction: column; background: var(--night); color: var(--moon);
-    font-family: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 1.0625rem; line-height: 1.55;
-  }
-  a { color: inherit; }
-  :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
-  .wrap { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
-  header { padding: 1.25rem 0; }
-  .mark { display: inline-flex; align-items: center; gap: .6rem; font-weight: 800; font-variation-settings: "wdth" 80; font-size: 1.25rem; text-decoration: none; }
-  main { flex: 1; display: flex; align-items: center; padding: 3rem 0 5rem; }
-  h1 { margin: 0 0 1rem; font-weight: 900; font-variation-settings: "wdth" 66; font-size: clamp(2.6rem, 7vw, 5rem); line-height: .95; word-spacing: .12em; }
-  p { margin: 0 0 1.5rem; color: var(--dim); max-width: 40ch; }
-  .home { display: inline-block; padding: .7rem 1.2rem; border-radius: 8px; background: var(--amber); color: var(--night); font-weight: 700; text-decoration: none; }
-  .home:hover { background: #f5bb62; }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#f2a93b"/><path d="M10.6 7.5c.9-.4 1.9 0 2.3.8l1.6 3.4c.4.8.2 1.7-.5 2.3l-1.5 1.2a11.6 11.6 0 0 0 4.3 4.3l1.2-1.5c.6-.7 1.5-.9 2.3-.5l3.4 1.6c.8.4 1.2 1.4.8 2.3l-.7 1.6c-.6 1.3-2 2.1-3.4 1.8C13.9 23.6 8.4 18.1 7.3 11.6c-.3-1.4.5-2.8 1.8-3.4z" fill="#14244b"/></symbol>
+</svg>
+<header class="site-head">
   <div class="wrap">
-    <a class="mark" href="/" aria-label="Every Call Covered home">
-      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#f2a93b"/><path d="M10.6 7.5c.9-.4 1.9 0 2.3.8l1.6 3.4c.4.8.2 1.7-.5 2.3l-1.5 1.2a11.6 11.6 0 0 0 4.3 4.3l1.2-1.5c.6-.7 1.5-.9 2.3-.5l3.4 1.6c.8.4 1.2 1.4.8 2.3l-.7 1.6c-.6 1.3-2 2.1-3.4 1.8C13.9 23.6 8.4 18.1 7.3 11.6c-.3-1.4.5-2.8 1.8-3.4z" fill="#14244b"/></svg>
-      Every Call Covered
-    </a>
+    <a class="brand" href="/" aria-label="Every Call Covered, home"><svg aria-hidden="true"><use href="#i-mark"/></svg><span>Every Call Covered</span></a>
   </div>
 </header>
-<main>
+<main class="lost">
   <div class="wrap">
-    <h1>This page doesn't exist.</h1>
-    <p>The link may be old or mistyped.</p>
-    <a class="home" href="/">Back to the home page</a>
+    <h1>Nobody's on this line.</h1>
+    <p>This page doesn't exist. The link may be old or mistyped.</p>
+    <div class="ctas">
+      <a class="btn" href="/">Go to the home page</a>
+      <a class="link" href="/#pricing">See pricing</a>
+    </div>
   </div>
 </main>
 </body>
