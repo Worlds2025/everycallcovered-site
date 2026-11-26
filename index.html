@@ -55,7 +55,7 @@
       <a href="#who">Who it's for</a>
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
-      <a href="#questions">Questions</a>
+      <a href="#questions">FAQ</a>
     </nav>
     <div class="head-actions">
       <a class="signin" data-app href="https://every-call-covered.replit.app/sign-in">Sign in</a>
@@ -69,7 +69,7 @@
       <a href="#who">Who it's for</a>
       <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
-      <a href="#questions">Questions</a>
+      <a href="#questions">FAQ</a>
       <a data-app href="https://every-call-covered.replit.app/sign-in">Sign in</a>
     </div>
   </nav>
@@ -81,8 +81,8 @@
   <div class="wrap">
     <h1 id="hero-title"><span>Your phone,</span> <span class="second">answered.</span></h1>
     <div class="hero-copy">
-      <p class="lede">Every Call Covered is an AI receptionist that picks up in your business's name, day and night. It takes the job down, sends emergencies to a real person, and puts every call it takes in your app, with the transcript.</p>
-      <p class="lede-2">Not a business? The Personal plan screens your calls, takes messages and lets the right people ring through.</p>
+      <p class="lede">Every Call Covered is an AI receptionist that picks up in your business's name, day and night. It takes the job down, sends emergencies to a real person, and puts each call it answers in your app, with the transcript.</p>
+      <p class="lede-2">Not a business? The Personal plan screens the calls on your own phone and takes messages.</p>
       <div class="ctas">
         <a class="btn" data-app href="https://every-call-covered.replit.app/sign-in" id="hero-cta"><svg aria-hidden="true"><use href="#i-phone"/></svg>Get a demo call</a>
         <a class="link" href="#pricing">See pricing</a>
@@ -91,14 +91,14 @@
     </div>
 
     <div class="night-log">
-      <div class="log-head"><h2>Overnight at Rivera Appliance</h2><span>Demo data</span></div>
+      <div class="log-head"><p class="log-title">Overnight at Rivera Appliance</p><span>Demo data</span></div>
       <ol class="log" id="log">
         <li><div class="row"><time datetime="19:16">7:16 PM</time><span class="who">Linda Chen</span><span class="what">Bosch dishwasher isn't draining. Wants Thursday morning.</span><span class="tagline"><span class="tag dark">Needs confirmation</span></span></div></li>
         <li><div class="row"><time datetime="22:12">10:12 PM</time><span class="who">Carlos Romero</span><span class="what">Washer leaking onto the floor. Ana Rivera, on call, took it.</span><span class="tagline"><span class="tag alarm">Emergency</span></span></div></li>
-        <li><div class="row"><time datetime="23:58">11:58 PM</time><span class="who num">(617) 555-0142</span><span class="what">Asked if you work on Sub-Zero fridges. Wants a call back.</span><span class="tagline"><span class="tag dark">Call back</span></span></div></li>
+        <li><div class="row"><time datetime="23:58">11:58 PM</time><span class="who num">(617) <span class="nw">555-0142</span></span><span class="what">Asked if you work on Sub-Zero fridges. Wants a call back.</span><span class="tagline"><span class="tag dark">Call back</span></span></div></li>
         <li><div class="row"><time datetime="06:41">6:41 AM</time><span class="who">Priya Shah</span><span class="what">Upset the technician was late on Friday. Wants a call today.</span><span class="tagline"><span class="tag bad">Unhappy caller</span></span></div></li>
       </ol>
-      <p class="log-more"><a class="link" href="#the-call">Watch two of these calls play out</a></p>
+      <p class="log-more"><a class="link" href="#the-call"><span class="js-only">Watch two of these calls play out</span><span class="no-js-only">See a call from start to finish</span></a></p>
     </div>
   </div>
 </section>
@@ -107,7 +107,7 @@
   <div class="wrap">
     <div class="section-head">
       <h2 id="call-title">Watch it take a call</h2>
-      <p>Pick a call and press play. You'll see the call as it happens, and then the app as the call lands in it.</p>
+      <p><span class="js-only">Pick a call and press play. The words appear as they're spoken, then the call lands in the app.</span><span class="no-js-only">A repair call from the first ring to the request waiting in the app.</span></p>
     </div>
 
     <div class="player" id="player">
@@ -126,7 +126,7 @@
         <div class="line" id="line" data-state="ended">
           <div class="line-head">
             <span class="line-state"><span class="led" aria-hidden="true"></span><span id="line-state">Call ended</span></span>
-            <span class="line-who" id="line-who">Answered by your receptionist</span>
+            <span class="line-who" id="line-who">Your receptionist</span>
             <span class="line-num" id="line-num">(781) 555-0123</span>
             <span class="clock" id="clock" aria-hidden="true">0:48</span>
             <span class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
@@ -153,7 +153,7 @@
         <ol class="chapter-list" id="chapters" aria-label="Parts of the call"></ol>
       </div>
       <p class="sr-only" aria-live="polite" id="announce"></p>
-      <p class="demo-note">These calls use demo data and are written to show how the receptionist handles each kind of call. The app screens are rebuilt from the real app.</p>
+      <p class="demo-note">Sample calls with demo data, scripted for this page. The app screens are copies of the real app's screens.</p>
     </div>
   </div>
 </section>
@@ -163,7 +163,7 @@
   <div class="wrap who-grid">
     <div>
       <h2 id="who-title">Set up for the trade you're in</h2>
-      <p class="intro">Pick your trade and it already knows the words your customers use, the questions you'd ask, and what counts as an emergency. You change any of it.</p>
+      <p class="intro">Pick your trade and it already knows the questions to ask and what counts as an emergency. You can change any of it.</p>
       <ul class="trades" aria-label="Trades it comes set up for">
         <li>Appliance repair</li><li>HVAC</li><li>Plumbing</li><li>Electrical</li><li>Garage door</li><li>Roofing</li>
         <li>Locksmith</li><li>Pest control</li><li>Septic</li><li>Solar</li><li>Pool service</li><li>Landscaping</li>
@@ -179,13 +179,13 @@
       <div class="me-points">
         <div><h3>Screens spam and scam calls</h3><p>Sales calls turned away if you like. A suspected scam is noted with the reason, and what to do if you already paid. Harassing calls are ended and flagged.</p></div>
         <div><h3>Family always gets through</h3><p>Put them on “Always ring me.” Numbers on “Never answer” are turned away. Everyone else reaches your assistant.</p></div>
-        <div><h3>Messages worth reading</h3><p>Who called, their number, what it's about and whether it's urgent. A caller who claims an emergency is checked first, with your family code word if you set one.</p></div>
+        <div><h3>Messages, not voicemail</h3><p>Who called, their number, what it's about and whether it's urgent. A caller who claims an emergency is checked first, with your family code word if you set one.</p></div>
         <div><h3>Creator mode</h3><p>Brand and sponsorship calls are taken down, never agreed to.</p></div>
       </div>
       <div class="mini" role="group" aria-label="Calls today, from the Personal app">
         <div class="mini-row"><span class="n">Dave Patel</span><span class="tag">Message</span><span class="d">Saturday works, but can dinner move to 7? He has the kids until 6.</span></div>
         <div class="mini-row"><span class="n">Maya Kim</span><span class="tag ok">Always rings</span><span class="d">On your always-ring list. Your phone rang.</span></div>
-        <div class="mini-row"><span class="n num">(857) 555-0190</span><span class="tag warn">Suspected scam</span><span class="d">Said your car warranty is expiring and asked for your card number. Your assistant ended the call.</span></div>
+        <div class="mini-row"><span class="n num">(857) <span class="nw">555-0190</span></span><span class="tag warn">Suspected scam</span><span class="d">Said your car warranty is expiring and asked for your card number. Your assistant ended the call.</span></div>
       </div>
       <p class="me-more"><a class="link" href="#pricing">Personal is $11.99 a month. See the plan</a></p>
     </aside>
@@ -195,7 +195,7 @@
 <section class="features" id="features" aria-labelledby="features-title">
   <div class="wrap features-inner">
     <div class="section-head">
-      <h2 id="features-title">What it handles on every call</h2>
+      <h2 id="features-title">From the first ring to the inbox</h2>
     </div>
 
     <div class="groups">
@@ -222,7 +222,7 @@
             <div class="app compact">
                 <div class="panel live-card" id="live-card">
                   <div class="top">
-                    <span class="who"><svg aria-hidden="true"><use href="#i-user"/></svg><span class="caller-num">(617) 555-0142</span></span>
+                    <span class="who"><svg aria-hidden="true"><use href="#i-user"/></svg><span class="caller-num">(617) <span class="nw">555-0142</span></span></span>
                     <span class="right"><span class="num">3:05</span><span class="tag ok"><span class="dot"></span>Live</span></span>
                   </div>
                   <p class="meta"><svg aria-hidden="true"><use href="#i-phone"/></svg><span id="xfer-on">On the call: Ana Rivera, on the app</span></p>
@@ -273,7 +273,6 @@
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>1 sign-in, no extra people</span></li>
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Screening, messages and your ring lists</span></li>
             </ul>
-            <a class="btn quiet" data-app href="https://every-call-covered.replit.app/sign-in">Get a demo call</a>
           </div>
         </div>
       </div>
@@ -290,7 +289,6 @@
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>2 sign-ins</span></li>
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Extra sign-ins $10 a month each</span></li>
             </ul>
-            <a class="btn quiet" data-app href="https://every-call-covered.replit.app/sign-in">Get a demo call</a>
           </div>
           <div class="plan">
             <h4>Growth</h4>
@@ -302,22 +300,26 @@
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>5 sign-ins</span></li>
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Extra sign-ins $10 a month each</span></li>
             </ul>
-            <a class="btn quiet" data-app href="https://every-call-covered.replit.app/sign-in">Get a demo call</a>
           </div>
         </div>
       </div>
     </div>
 
+    <div class="plans-cta">
+      <a class="btn" data-app href="https://every-call-covered.replit.app/sign-in"><svg aria-hidden="true"><use href="#i-phone"/></svg>Get a demo call</a>
+      <p>Start with a free demo call to your own phone, then choose a plan.</p>
+    </div>
+
     <div class="calc" id="calc">
       <div>
         <h3>What would a month cost you?</h3>
-        <p class="hint">Every minute counts: calls the receptionist answers, calls your team takes in the app, and calls you make from it. Each call rounds up to the whole minute.</p>
+        <p class="hint">All call time counts: calls the receptionist answers, calls your team takes in the app, and calls you make from it. Each call rounds up to the whole minute.</p>
         <p class="hint">Personal is one sign-in, with no extra people. To add people, choose Business or Growth.</p>
       </div>
       <div>
-        <label for="minutes">Call minutes in a month <output class="minutes" id="minutes-out" for="minutes">60</output></label>
-        <input class="range" type="range" id="minutes" min="0" max="800" step="10" value="60" aria-valuetext="60 minutes" style="--fill: 7.5%">
-        <div class="range-scale" aria-hidden="true"><span>0</span><span>400</span><span>800</span></div>
+        <div class="readout"><label for="minutes">Call minutes in a month</label><output class="minutes" id="minutes-out" for="minutes">60</output></div>
+        <input class="range" type="range" id="minutes" min="0" max="800" step="10" value="60" aria-valuetext="60 minutes" style="--p: .075">
+        <div class="range-scale" aria-hidden="true"><span style="--x: 0">0</span><span style="--x: .5">400</span><span style="--x: 1">800</span></div>
         <ul class="totals" id="totals">
           <li data-plan="personal"><span class="p">Personal</span><span class="v">$38.99</span><span class="why">$11.99 plus 60 minutes of credit</span></li>
           <li data-plan="business"><span class="p">Business</span><span class="v">$65.00</span><span class="why">Inside the 150 included</span></li>
@@ -328,7 +330,7 @@
 
     <div class="good-to-know">
       <div><h4>$10 of calls to start</h4><p>After your first payment we add $10 of call credit. It's for calls only and expires after 30 days.</p></div>
-      <div><h4>No free trial, a real demo</h4><p>Your number goes live once your first payment goes through. Before that, you get three demo calls of up to three minutes each, with the transcript of each.</p></div>
+      <div><h4>Three free demo calls</h4><p>Your number goes live once your first payment goes through. Before that, you get three demo calls of up to three minutes each, with the transcript of each.</p></div>
       <div><h4>Minutes and credit</h4><p>Included minutes reset each month and don't roll over. Credit is prepaid, and auto-refill can add more when it runs low.</p></div>
     </div>
   </div>
@@ -338,12 +340,12 @@
 <section class="faq" id="questions" aria-labelledby="faq-title">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="faq-title">Questions people ask first</h2>
+      <h2 id="faq-title">Questions</h2>
     </div>
     <div class="qa">
       <details>
         <summary>Does it sound like a robot?<span class="pm" aria-hidden="true"></span></summary>
-        <div class="a"><p>It's built to sound like a trained front desk: short turns at a normal pace, and it stops talking when the caller cuts in.</p><p>The quickest way to judge the voice is the demo call, which rings your own phone.</p></div>
+        <div class="a"><p>It talks like a good front desk: short turns at a normal pace, and it stops talking when the caller cuts in.</p><p>The quickest way to judge the voice is the demo call, which rings your own phone.</p></div>
       </details>
       <details>
         <summary>Can I keep my phone number?<span class="pm" aria-hidden="true"></span></summary>
@@ -377,7 +379,7 @@
 <section class="closer" id="get-started" aria-labelledby="closer-title">
   <div class="wrap">
     <h2 id="closer-title">Hear it answer your phone.</h2>
-    <p>Sign up, answer a few questions about how your calls should go, and the demo rings your phone. You play the customer.</p>
+    <p>Sign up, answer a few questions about how your calls should go, and the demo rings your phone.</p>
     <div class="ctas">
       <a class="btn" data-app href="https://every-call-covered.replit.app/sign-in" id="closer-cta"><svg aria-hidden="true"><use href="#i-phone"/></svg>Get a demo call</a>
       <a class="link" data-app href="https://every-call-covered.replit.app/sign-in">Already signed up? Sign in</a>
@@ -399,7 +401,7 @@
         <li><a href="#who">Who it's for</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#questions">Questions</a></li>
+        <li><a href="#questions">FAQ</a></li>
         <li><a data-app href="https://every-call-covered.replit.app/sign-in">Sign in</a></li>
       </ul>
     </nav>
