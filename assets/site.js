@@ -55,9 +55,12 @@
         const li = $(`[data-plan="${id}"]`);
         $(".v", li).textContent = money(totals[id]);
         $(".why", li).textContent = id === "personal"
-          ? (m ? `$11.99 plus ${m} minutes of credit` : "$11.99, no calls")
-          : over ? `${over} minutes past the ${p.included} included` : `Inside the ${p.included} included`;
+          ? (m ? `$11.99 + ${m} min at $0.45` : "$11.99, no calls")
+          : over ? `$${p.monthly} + ${over} min over, at $0.39` : `Within the ${p.included} included minutes`;
       }
+      // The lowest total at this many minutes
+      const best = Object.keys(totals).reduce((a, b) => (totals[b] < totals[a] - 1e-9 ? b : a));
+      $$("#totals li").forEach(li => li.classList.toggle("best", li.dataset.plan === best));
     };
     range.addEventListener("input", render);
     render();
@@ -93,9 +96,16 @@
       timer = setTimeout(() => set("Nina Brooks answered on the app.", "On the call: Nina Brooks, on the app", [again()]), 1600);
     };
     start();
+    // The card's call timer runs while the card is on screen
     const callClock = $("#live-card .right .num");
-    let secs = 185;
-    if (callClock) setInterval(() => { secs++; callClock.textContent = `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, "0")}`; }, 1000);
+    let secs = 185, ticking = 0;
+    const tick = () => { secs++; callClock.textContent = `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, "0")}`; };
+    if (callClock && "IntersectionObserver" in window) {
+      new IntersectionObserver(([e]) => {
+        clearInterval(ticking);
+        if (e.isIntersecting) ticking = setInterval(tick, 1000);
+      }).observe(callClock);
+    }
   }
 
   // ---- The call player ----
@@ -151,7 +161,7 @@
     repair: {
       biz: "Rivera Appliance", nav: BIZ_NAV, navOn: "Inbox", lineName: "Rivera Appliance", lineSub: "Your business line", answeredBy: "Your receptionist",
       num: "(781) 555-0123",
-      chapters: ["Rings", "Answers in your name", "Hears the problem", "Takes the details", "Offers a time", "Lands in your app"],
+      chapters: ["Rings", "Answers in your name", "Hears the problem", "Takes the details", "Asks for a time", "Lands in your app"],
       steps: [
         { t: 0, ch: 0, ring: true },
         { t: 2, ch: 1, who: "r", text: "This call may be recorded for training and business purposes. Thanks for calling Rivera Appliance. How can I help you today?" },
@@ -229,7 +239,7 @@
           <div class="mini-row"><span class="n num">(857) <span class="nw">555-0190</span></span><span class="tag warn">Suspected scam</span><span class="d">Said your car warranty is expiring and asked for your card number. Your assistant ended the call.</span></div>
           <div class="scam-box"><h4><svg aria-hidden="true"><use href="#i-shield"/></svg>This looks like a scam</h4>
             <p>Don't call back on a number this caller gave. If you already paid them, call your bank or card company and ask for a chargeback.</p>
-            <div class="app-actions"><button type="button" class="app-btn outline" data-note="In your app, this number would now be turned away.">Add to "Never answer"</button></div>
+            <div class="app-actions"><button type="button" class="app-btn outline" data-note="In your app, this number would now be turned away.">Add to “Never answer”</button></div>
             <p class="app-note" aria-live="polite"></p></div></div>`),
     },
   };
@@ -269,7 +279,7 @@
     line.dataset.state = state;
     lineState.textContent = { idle: "Waiting for a call", ringing: "Ringing", live: "On the call", ended: "Call ended" }[state];
     if (state === "idle") { lineWho.textContent = sc.lineName; lineNum.textContent = sc.lineSub; }
-    else { lineWho.textContent = state === "ringing" ? "Incoming call" : sc.answeredBy; lineNum.textContent = sc.num; }
+    else { lineWho.textContent = state === "ringing" ? "Incoming call" : sc.answeredBy; lineNum.innerHTML = `Caller <span class="num">${esc(sc.num)}</span>`; }
     if (state !== "live") delete line.dataset.speaking;
     toApp.textContent = state === "ended" ? "See where it landed" : "See the app";
   };
@@ -397,6 +407,7 @@
         transcript.scrollTop = transcript.scrollHeight;
         await sleep(list[i - 1].w.trim() ? perWord : 0);
       }
+      if (!alive()) return;
       done();
     }
     delete line.dataset.speaking;
@@ -468,7 +479,11 @@
   };
 
   tabs.forEach((t, i) => {
-    t.addEventListener("click", () => load(t.dataset.scenario, true));
+    t.addEventListener("click", () => {
+      // The call already on screen keeps playing; Play and Play again restart it.
+      if (t.dataset.scenario === scId && status !== "idle") return;
+      load(t.dataset.scenario, true);
+    });
     t.addEventListener("keydown", e => {
       const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
       if (to === undefined) return;
@@ -515,6 +530,11 @@
     let h = 0;
     for (const view of [sc.during("idle"), sc.during("ringing"), sc.during("live"), sc.after(), sc.after(true)]) {
       sizer.innerHTML = view;
+      // Measure with each button's note showing (its longest), so pressing one never moves the page
+      $$(".app-note", sizer).forEach(n => {
+        const notes = $$("button[data-note]", n.parentElement).map(b => b.dataset.note);
+        n.textContent = notes.sort((a, b) => b.length - a.length)[0] || "";
+      });
       h = Math.max(h, sizer.offsetHeight);
     }
     sizer.innerHTML = "";
@@ -541,7 +561,7 @@
   if (!reduceMotion.matches && "IntersectionObserver" in window) {
     const io = new IntersectionObserver(([e]) => {
       if (e.isIntersecting && !started) { io.disconnect(); run(0); }
-    }, { threshold: 0.35 });
+    }, { threshold: 0.2 });
     io.observe(stage);
   }
 })();
