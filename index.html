@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Every Call Covered: an AI receptionist that answers in your name</title>
-<meta name="description" content="An AI receptionist that answers your phone in your business's name, day and night. It takes the job down, sends emergencies to your on-call person, and puts every call it takes in your app with the transcript. From $65 a month for trade businesses, or $11.99 for your own phone.">
+<meta name="description" content="An AI receptionist that answers your phone in your business's name, day and night. It takes the job down and gets emergencies to your on-call person, and every call it answers lands in your app with the transcript. From $65 a month for trade businesses, or $11.99 for your own phone.">
 <!-- The app's address. Every sign-up, demo and sign-in link (data-app) also carries it in its href, so the links work without JavaScript; assets/site.js keeps them in step with this tag. To move the app, replace the address everywhere in this file. -->
 <meta name="ecc-app-url" content="https://every-call-covered.replit.app/sign-in">
 <meta name="theme-color" content="#14244b">
 <link rel="canonical" href="https://everycallcovered.com/">
 <meta property="og:site_name" content="Every Call Covered">
 <meta property="og:title" content="Every Call Covered: an AI receptionist that answers in your name">
-<meta property="og:description" content="It answers day and night, takes the job down, sends emergencies to your on-call person, and puts every call it takes in your app with the transcript.">
+<meta property="og:description" content="It answers in your business's name day and night, takes the job down and gets emergencies to your on-call person. Every call it answers lands in your app with the transcript.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://everycallcovered.com/">
 <meta property="og:locale" content="en_US">
@@ -21,7 +21,7 @@
 <meta property="og:image:alt" content="The top of the Every Call Covered home page: the headline “Your phone, answered.” over an overnight call log.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Every Call Covered: an AI receptionist that answers in your name">
-<meta name="twitter:description" content="It answers day and night, takes the job down, sends emergencies to your on-call person, and puts every call it takes in your app with the transcript.">
+<meta name="twitter:description" content="It answers in your business's name day and night, takes the job down and gets emergencies to your on-call person. Every call it answers lands in your app with the transcript.">
 <meta name="twitter:image" content="https://everycallcovered.com/assets/og-image.png">
 <meta name="twitter:image:alt" content="The top of the Every Call Covered home page: the headline “Your phone, answered.” over an overnight call log.">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -81,7 +81,7 @@
   <div class="wrap">
     <h1 id="hero-title"><span>Your phone,</span> <span class="second">answered.</span></h1>
     <div class="hero-copy">
-      <p class="lede">Every Call Covered is an AI receptionist that picks up in your business's name, day and night. It takes the job down, sends emergencies to a real person, and puts each call it answers in your app, with the transcript.</p>
+      <p class="lede">Every Call Covered is an AI receptionist that picks up in your business's name, day and night. It takes the job down and gets emergencies to a real person. Every call it answers lands in your app with the transcript.</p>
       <p class="lede-2">Not a business? The Personal plan screens the calls on your own phone and takes messages.</p>
       <div class="ctas">
         <a class="btn" data-app href="https://every-call-covered.replit.app/sign-in" id="hero-cta"><svg aria-hidden="true"><use href="#i-phone"/></svg>Get a demo call</a>
@@ -115,7 +115,7 @@
         <div class="scenarios" role="tablist" aria-label="Example calls">
           <button role="tab" id="tab-repair" aria-selected="true" aria-controls="stage" data-scenario="repair"><span class="wide-only">A repair request</span><span class="narrow-only">Repair</span></button>
           <button role="tab" id="tab-emergency" aria-selected="false" aria-controls="stage" data-scenario="emergency" tabindex="-1"><span class="wide-only">An emergency at 10 PM</span><span class="narrow-only">Emergency</span></button>
-          <button role="tab" id="tab-scam" aria-selected="false" aria-controls="stage" data-scenario="scam" tabindex="-1"><span class="wide-only">A scam call, Personal plan</span><span class="narrow-only">Scam call</span></button>
+          <button role="tab" id="tab-scam" aria-selected="false" aria-controls="stage" data-scenario="scam" tabindex="-1"><span class="wide-only">A scam call, Personal plan</span><span class="narrow-only">Scam</span></button>
         </div>
         <div class="transport">
           <button class="ghost" id="play" type="button"><svg aria-hidden="true"><use href="#i-play"/></svg><span class="play-label">Play</span></button>
@@ -125,11 +125,10 @@
       <div class="stage" id="stage" role="tabpanel" aria-labelledby="tab-repair">
         <div class="line" id="line" data-state="ended">
           <div class="line-head">
-            <span class="line-state"><span class="led" aria-hidden="true"></span><span id="line-state">Call ended</span></span>
+            <span class="line-state"><span class="led" aria-hidden="true"></span><span id="line-state">Call ended</span><span class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></span>
             <span class="line-who" id="line-who">Your receptionist</span>
-            <span class="line-num" id="line-num">(781) 555-0123</span>
+            <span class="line-num" id="line-num">Caller <span class="num">(781) 555-0123</span></span>
             <span class="clock" id="clock" aria-hidden="true">0:48</span>
-            <span class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
             <span class="now" aria-hidden="true"><span class="bar"><i id="line-progress" style="width: 100%"></i></span><span id="now-chapter">Lands in your app</span></span>
           </div>
           <div class="transcript resolved" id="transcript" role="log" aria-live="off" aria-label="Transcript" tabindex="0"><div class="msg r"><span class="who">Receptionist, 0:02</span><p>This call may be recorded for training and business purposes. Thanks for calling Rivera Appliance. How can I help you today?</p></div><div class="msg c"><span class="who">Caller, 0:09</span><p>Hi, my <span class="k">Bosch dishwasher isn't draining</span>. There's water sitting in the bottom after every cycle.</p></div><div class="msg r"><span class="who">Receptionist, 0:15</span><p>Sorry about that. I can get a technician out to look at it. Can I get your name and a good number to reach you?</p></div><div class="msg c"><span class="who">Caller, 0:23</span><p><span class="k">Linda Chen</span>, <span class="k">781-555-0123</span>.</p></div><div class="msg r"><span class="who">Receptionist, 0:27</span><p>Thanks, Linda. What's the address for the visit?</p></div><div class="msg c"><span class="who">Caller, 0:30</span><p><span class="k">27 Birch Lane</span> in Springfield.</p></div><div class="msg r"><span class="who">Receptionist, 0:33</span><p>Got it, 27 Birch Lane. Is a morning or an afternoon better for you?</p></div><div class="msg c"><span class="who">Caller, 0:38</span><p><span class="k">Thursday morning</span> would be great.</p></div><div class="msg r"><span class="who">Receptionist, 0:41</span><p>I have that down for Thursday morning. The office will confirm the visit with you.</p></div><div class="msg c"><span class="who">Caller, 0:46</span><p>Perfect, thanks.</p></div></div>
@@ -153,7 +152,7 @@
         <ol class="chapter-list" id="chapters" aria-label="Parts of the call"></ol>
       </div>
       <p class="sr-only" aria-live="polite" id="announce"></p>
-      <p class="demo-note">Sample calls with demo data, scripted for this page. The app screens are copies of the real app's screens.</p>
+      <p class="demo-note">Sample calls with demo data, scripted for this page. The app screens are rebuilt from the real app.</p>
     </div>
   </div>
 </section>
@@ -173,13 +172,13 @@
       </ul>
     </div>
 
-    <aside class="me" aria-labelledby="me-title">
+    <section class="me" aria-labelledby="me-title">
       <h2 id="me-title">And for your own phone</h2>
       <p class="intro">The Personal plan answers the calls you can't or won't take, and lets the right ones through.</p>
       <div class="me-points">
         <div><h3>Screens spam and scam calls</h3><p>Sales calls turned away if you like. A suspected scam is noted with the reason, and what to do if you already paid. Harassing calls are ended and flagged.</p></div>
         <div><h3>Family always gets through</h3><p>Put them on “Always ring me.” Numbers on “Never answer” are turned away. Everyone else reaches your assistant.</p></div>
-        <div><h3>Messages, not voicemail</h3><p>Who called, their number, what it's about and whether it's urgent. A caller who claims an emergency is checked first, with your family code word if you set one.</p></div>
+        <div><h3>Messages you can act on</h3><p>Who called, their number, what it's about and whether it's urgent. A caller who claims an emergency is checked first, with your family code word if you set one.</p></div>
         <div><h3>Creator mode</h3><p>Brand and sponsorship calls are taken down, never agreed to.</p></div>
       </div>
       <div class="mini" role="group" aria-label="Calls today, from the Personal app">
@@ -188,14 +187,14 @@
         <div class="mini-row"><span class="n num">(857) <span class="nw">555-0190</span></span><span class="tag warn">Suspected scam</span><span class="d">Said your car warranty is expiring and asked for your card number. Your assistant ended the call.</span></div>
       </div>
       <p class="me-more"><a class="link" href="#pricing">Personal is $11.99 a month. See the plan</a></p>
-    </aside>
+    </section>
   </div>
 </section>
 
 <section class="features" id="features" aria-labelledby="features-title">
   <div class="wrap features-inner">
     <div class="section-head">
-      <h2 id="features-title">From the first ring to the inbox</h2>
+      <h2 id="features-title">What it does</h2>
     </div>
 
     <div class="groups">
@@ -206,7 +205,7 @@
           <li><strong>Replies in the caller's language</strong><span>A caller who speaks Spanish hears Spanish back. Your notes stay in English.</span></li>
           <li><strong>Asks what your trade needs</strong><span>For appliance repair: the appliance, the brand, whether it's under warranty, the address and a good time. Each trade asks its own questions.</span></li>
           <li><strong>Says what it is</strong><span>It doesn't pretend to be a person. Asked, it says it's your virtual assistant.</span></li>
-          <li class="wide"><strong>Emergencies go to a person</strong><span>Your trade's emergency list, plus your own. It gives the safety step first, checks the problem is happening now, takes the address, then calls your on-call people in order until one presses 1. For a gas smell, it tells the caller to leave and call 911, books nothing, and still alerts your on-call person.</span></li>
+          <li class="wide key"><strong>Emergencies go to a person</strong><span>Your trade's emergency list, plus your own. It gives the safety step first, checks the problem is happening now, takes the address, then calls your on-call people in order until one presses 1. For a gas smell, it tells the caller to leave and call 911, books nothing, and still alerts your on-call person.</span></li>
         </ul>
       </div>
 
@@ -317,21 +316,22 @@
         <p class="hint">Personal is one sign-in, with no extra people. To add people, choose Business or Growth.</p>
       </div>
       <div>
+        <p class="no-js-only calc-example">At 60 call minutes a month:</p>
         <div class="readout"><label for="minutes">Call minutes in a month</label><output class="minutes" id="minutes-out" for="minutes">60</output></div>
         <input class="range" type="range" id="minutes" min="0" max="800" step="10" value="60" aria-valuetext="60 minutes" style="--p: .075">
         <div class="range-scale" aria-hidden="true"><span style="--x: 0">0</span><span style="--x: .5">400</span><span style="--x: 1">800</span></div>
         <ul class="totals" id="totals">
-          <li data-plan="personal"><span class="p">Personal</span><span class="v">$38.99</span><span class="why">$11.99 plus 60 minutes of credit</span></li>
-          <li data-plan="business"><span class="p">Business</span><span class="v">$65.00</span><span class="why">Inside the 150 included</span></li>
-          <li data-plan="growth"><span class="p">Growth</span><span class="v">$119.00</span><span class="why">Inside the 400 included</span></li>
+          <li data-plan="personal" class="best"><span class="p">Personal</span><span class="v">$38.99</span><span class="why">$11.99 + 60 min at $0.45</span></li>
+          <li data-plan="business"><span class="p">Business</span><span class="v">$65.00</span><span class="why">Within the 150 included minutes</span></li>
+          <li data-plan="growth"><span class="p">Growth</span><span class="v">$119.00</span><span class="why">Within the 400 included minutes</span></li>
         </ul>
       </div>
     </div>
 
     <div class="good-to-know">
-      <div><h4>$10 of calls to start</h4><p>After your first payment we add $10 of call credit. It's for calls only and expires after 30 days.</p></div>
-      <div><h4>Three free demo calls</h4><p>Your number goes live once your first payment goes through. Before that, you get three demo calls of up to three minutes each, with the transcript of each.</p></div>
-      <div><h4>Minutes and credit</h4><p>Included minutes reset each month and don't roll over. Credit is prepaid, and auto-refill can add more when it runs low.</p></div>
+      <div><h3>$10 of calls to start</h3><p>After your first payment we add $10 of call credit. It's for calls only and expires after 30 days.</p></div>
+      <div><h3>Three free demo calls</h3><p>Your number goes live once your first payment goes through. Before that, you get three demo calls of up to three minutes each, with the transcript of each.</p></div>
+      <div><h3>Minutes and credit</h3><p>Included minutes reset each month and don't roll over. Credit is prepaid, and auto-refill can add more when it runs low.</p></div>
     </div>
   </div>
 </section>
@@ -369,7 +369,7 @@
       </details>
       <details>
         <summary>Will it put jobs on my calendar?<span class="pm" aria-hidden="true"></span></summary>
-        <div class="a"><p>No. Every request lands in your inbox as "Needs confirmation." You confirm, edit, assign or decline it. Nothing is scheduled on its own, and confirming never texts the customer.</p></div>
+        <div class="a"><p>No. Every request lands in your inbox as “Needs confirmation.” You confirm, edit, assign or decline it. Nothing is scheduled on its own, and confirming never texts the customer.</p></div>
       </details>
     </div>
   </div>
