@@ -18,6 +18,15 @@
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
+  // ---- Menu (below 900px) ----
+  const menuBtn = $(".menu-btn"), menu = $("#menu");
+  if (menuBtn && menu) {
+    const setMenu = open => { menu.hidden = !open; menuBtn.setAttribute("aria-expanded", String(open)); };
+    menuBtn.addEventListener("click", () => setMenu(menu.hidden));
+    menu.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && !menu.hidden) { setMenu(false); menuBtn.focus(); } });
+  }
+
   // ---- The overnight log arrives row by row, once ----
   const log = $("#log");
   if (log) requestAnimationFrame(() => log.classList.add("in"));
@@ -47,7 +56,11 @@
           : over ? `${over} minutes past the ${p.included} included` : `Inside the ${p.included} included`;
       }
       const best = totals.business <= totals.growth ? "business" : "growth";
-      $$("#totals li").forEach(li => li.classList.toggle("best", li.dataset.plan === best));
+      $$("#totals li").forEach(li => {
+        const on = li.dataset.plan === best;
+        li.classList.toggle("best", on);
+        if (on) $(".why", li).insertAdjacentHTML("afterbegin", '<span class="best-note">Lower of the two business plans. </span>');
+      });
     };
     range.addEventListener("input", render);
     render();
@@ -126,7 +139,7 @@
       <div><b>0</b><span>Urgent</span></div></div>`;
   const meRows = `
     <div class="mini-row"><span class="n">Dave Patel</span><span class="tag">Message</span><span class="d">Saturday works, but can dinner move to 7? He has the kids until 6.</span></div>
-    <div class="mini-row"><span class="n">Linda Chen</span><span class="tag ok">Always rings</span><span class="d">On your always-ring list. Your phone rang.</span></div>`;
+    <div class="mini-row"><span class="n">Maya Kim</span><span class="tag ok">Always rings</span><span class="d">On your always-ring list. Your phone rang.</span></div>`;
   const todayPage = (screened, newRow) => `
     <div class="app-title"><div><h3>Today</h3><p class="sub">What your assistant handled since midnight.</p></div></div>
     ${tiles(screened)}
@@ -145,7 +158,7 @@
         { t: 19, ch: 3, who: "c", text: "[[27 Birch Lane]] in Springfield." },
         { t: 23, ch: 4, who: "r", text: "Got it, 27 Birch Lane. Is a morning or an afternoon better for you?" },
         { t: 28, ch: 4, who: "c", text: "[[Thursday morning]] would be great." },
-        { t: 31, ch: 4, who: "r", text: "I have that down for Thursday morning. The office will confirm the visit with you today." },
+        { t: 31, ch: 4, who: "r", text: "I have that down for Thursday morning. The office will confirm the visit with you." },
         { t: 36, ch: 4, who: "c", text: "Perfect, thanks." },
         { t: 38, ch: 5, end: true },
       ],
@@ -314,6 +327,7 @@
   const finish = animate => {
     setLine("ended");
     transcript.classList.add("resolved");
+    requestAnimationFrame(() => { transcript.scrollTop = transcript.scrollHeight; });
     setApp(sc.after(), animate);
     announce.textContent = "The call ended and landed in the app.";
   };
@@ -463,6 +477,10 @@
   chaptersEl.addEventListener("click", e => {
     const b = e.target.closest("button[data-ch]");
     if (b) jump(Number(b.dataset.ch));
+  });
+
+  $("#to-app").addEventListener("click", () => {
+    $("#app").scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "start" });
   });
 
   appMain.addEventListener("click", e => {

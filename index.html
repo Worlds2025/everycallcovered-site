@@ -38,17 +38,28 @@
   <div class="wrap">
     <a class="brand" href="/" aria-label="Every Call Covered, home"><svg aria-hidden="true"><use href="#i-mark"/></svg><span>Every Call Covered</span></a>
     <nav class="site-nav" aria-label="Sections">
-      <a href="#the-call">How it answers</a>
+      <a href="#the-call">The call</a>
       <a href="#who">Who it's for</a>
-      <a href="#features">What it handles</a>
+      <a href="#features">Features</a>
       <a href="#pricing">Pricing</a>
       <a href="#questions">Questions</a>
     </nav>
     <div class="head-actions">
       <a class="signin" data-app href="#get-started">Sign in</a>
-      <a class="btn small" data-app href="#get-started">Get a demo call</a>
+      <a class="btn small" data-app href="#get-started"><span class="wide-only">Get a demo call</span><span class="narrow-only">Demo call</span></a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     </div>
   </div>
+  <nav class="menu" id="menu" aria-label="Sections, menu" hidden>
+    <div class="wrap">
+      <a href="#the-call">The call</a>
+      <a href="#who">Who it's for</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#questions">Questions</a>
+      <a data-app href="#get-started">Sign in</a>
+    </div>
+  </nav>
 </header>
 
 <main id="main">
@@ -57,7 +68,7 @@
   <div class="wrap">
     <h1 id="hero-title"><span>Your phone,</span> <span class="second">answered.</span></h1>
     <div class="hero-copy">
-      <p class="lede">An AI receptionist that picks up in your business's name, day and night. It takes the job down, sends emergencies to a real person, and puts every call in your app with the transcript.</p>
+      <p class="lede">Every Call Covered is an AI receptionist that picks up in your business's name, day and night. It takes the job down, sends emergencies to a real person, and puts every call in your app with the transcript.</p>
       <p class="lede-2">Not a business? The Personal plan screens your calls, takes messages and lets the right people ring through.</p>
       <div class="ctas">
         <a class="btn" data-app href="#get-started" id="hero-cta"><svg aria-hidden="true"><use href="#i-phone"/></svg>Get a demo call</a>
@@ -82,16 +93,16 @@
 <section class="call-section" id="the-call" aria-labelledby="call-title">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="call-title">Watch it take a call.</h2>
-      <p>Pick a call. On the left is the call as it happens. On the right is your app, where the call lands when it ends.</p>
+      <h2 id="call-title">Watch it take a call</h2>
+      <p>Pick a call and press play. You'll see the call as it happens, and then the app as the call lands in it.</p>
     </div>
 
     <div class="player" id="player">
       <div class="player-bar">
         <div class="scenarios" role="tablist" aria-label="Example calls">
-          <button role="tab" id="tab-repair" aria-selected="true" aria-controls="stage" data-scenario="repair">A repair request</button>
-          <button role="tab" id="tab-emergency" aria-selected="false" aria-controls="stage" data-scenario="emergency" tabindex="-1">An emergency at 10 PM</button>
-          <button role="tab" id="tab-scam" aria-selected="false" aria-controls="stage" data-scenario="scam" tabindex="-1">A scam call, Personal plan</button>
+          <button role="tab" id="tab-repair" aria-selected="true" aria-controls="stage" data-scenario="repair"><span class="wide-only">A repair request</span><span class="narrow-only">Repair</span></button>
+          <button role="tab" id="tab-emergency" aria-selected="false" aria-controls="stage" data-scenario="emergency" tabindex="-1"><span class="wide-only">An emergency at 10 PM</span><span class="narrow-only">Emergency</span></button>
+          <button role="tab" id="tab-scam" aria-selected="false" aria-controls="stage" data-scenario="scam" tabindex="-1"><span class="wide-only">A scam call, Personal plan</span><span class="narrow-only">Scam, Personal</span></button>
         </div>
         <div class="transport">
           <button class="ghost" id="play" type="button"><svg aria-hidden="true"><use href="#i-play"/></svg><span>Play</span></button>
@@ -107,10 +118,11 @@
             <span class="clock" id="clock" aria-hidden="true">0:00</span>
             <span class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
           </div>
-          <div class="transcript" id="transcript" aria-label="Transcript"></div>
+          <div class="transcript" id="transcript" role="log" aria-live="off" aria-label="Transcript" tabindex="0"></div>
+          <button class="ghost to-app" id="to-app" type="button">See where it landed in the app</button>
         </div>
 
-        <div class="app" id="app" aria-label="The app">
+        <div class="app" id="app" role="region" aria-label="The app">
           <aside class="app-side" aria-hidden="true">
             <div class="biz" id="app-biz">Rivera Appliance<small>Every Call Covered</small></div>
             <ul id="app-nav"></ul>
@@ -136,7 +148,7 @@
 <section class="audience" id="who" aria-labelledby="who-title">
   <div class="wrap who-grid">
     <div>
-      <h2 id="who-title">Set up for the trade you're in.</h2>
+      <h2 id="who-title">Set up for the trade you're in</h2>
       <p class="intro">Pick your trade and it already knows the words your customers use, the questions you'd ask, and what counts as an emergency. You change any of it.</p>
       <ul class="trades" aria-label="Trades it comes set up for">
         <li>Appliance repair</li><li>HVAC</li><li>Plumbing</li><li>Electrical</li><li>Garage door</li><li>Roofing</li>
@@ -147,24 +159,24 @@
       </ul>
       <div class="biz-points">
         <div><h3>Sounds like your front desk</h3><p>Your greeting, your hours, your services. Short replies, and it stops talking when the caller cuts in.</p></div>
-        <div><h3>Nothing booked behind your back</h3><p>Every request waits for you to confirm, edit, assign or decline it. Confirming never texts the customer.</p></div>
+        <div><h3>Nothing booked behind your back</h3><p>Every request waits for you to confirm, edit, assign or decline it.</p></div>
         <div><h3>Your team on one line</h3><p>Owner, office and technicians each sign in and see what their role allows, with team chat for every job.</p></div>
         <div><h3>Gets a person when it matters</h3><p>Emergencies go to your on-call people. Callers who ask for someone can be put through.</p></div>
       </div>
     </div>
 
     <aside class="me" aria-labelledby="me-title">
-      <h2 id="me-title">Just for you, too.</h2>
+      <h2 id="me-title">And for your own phone</h2>
       <p class="intro">The Personal plan answers the calls you can't or won't take, and lets the right ones through.</p>
       <div class="me-points">
-        <div><h3>Spam and scams screened out</h3><p>Sales calls turned away if you like. A suspected scam is noted with the reason, and what to do if you already paid.</p></div>
+        <div><h3>Screens spam and scam calls</h3><p>Sales calls turned away if you like. A suspected scam is noted with the reason, and what to do if you already paid.</p></div>
         <div><h3>Your people always get through</h3><p>Put family on "Always ring me." Numbers on "Never answer" are turned away. Everyone else reaches your assistant.</p></div>
         <div><h3>Messages worth reading</h3><p>Who called, their number, what it's about and whether it's urgent. A caller who claims an emergency is checked first, with your family code word if you set one.</p></div>
         <div><h3>Creator mode</h3><p>Brand and sponsorship calls are taken down, never agreed to. Harassing calls are ended and flagged.</p></div>
       </div>
-      <div class="mini" aria-label="Calls today, from the Personal app">
+      <div class="mini" role="group" aria-label="Calls today, from the Personal app">
         <div class="mini-row"><span class="n">Dave Patel</span><span class="tag">Message</span><span class="d">Saturday works, but can dinner move to 7? He has the kids until 6.</span></div>
-        <div class="mini-row"><span class="n">Linda Chen</span><span class="tag ok">Always rings</span><span class="d">On your always-ring list. Your phone rang.</span></div>
+        <div class="mini-row"><span class="n">Maya Kim</span><span class="tag ok">Always rings</span><span class="d">On your always-ring list. Your phone rang.</span></div>
         <div class="mini-row"><span class="n num">(857) 555-0190</span><span class="tag warn">Suspected scam</span><span class="d">Said your car warranty is expiring and asked for your card number. Your assistant ended the call.</span></div>
       </div>
     </aside>
@@ -174,30 +186,28 @@
 <section class="features" id="features" aria-labelledby="features-title">
   <div class="wrap features-inner">
     <div class="section-head">
-      <h2 id="features-title">What it handles.</h2>
-      <p>The things a good front desk does, done the same way on every call.</p>
+      <h2 id="features-title">What it handles on every call</h2>
     </div>
 
     <div class="groups">
       <div class="group">
-        <h3>On the call<small>What your callers get.</small></h3>
+        <h3>On the call</h3>
         <ul class="items">
           <li><strong>Your name, your greeting</strong><span>It answers as your business, with your hours and services, and plays the recording notice first.</span></li>
-          <li><strong>Your trade's questions</strong><span>The appliance and brand, the address, a good time. Each trade asks its own.</span></li>
           <li><strong>Honest about what it is</strong><span>It never claims to be a person. Asked directly, it says it's your virtual assistant.</span></li>
-          <li><strong>The caller's language</strong><span>A caller who speaks Spanish or another language gets answers in it. Your notes are always in English.</span></li>
+          <li><strong>The caller's language</strong><span>It answers callers in the language they speak. Your notes stay in English.</span></li>
+          <li><strong>Your trade's questions</strong><span>The appliance and brand, the address, a good time. Each trade asks its own.</span></li>
           <li class="wide"><strong>Emergencies go to a person</strong><span>Your trade's emergency list, plus your own. It gives the safety step first, checks the problem is happening now, takes the address, then calls your on-call people in order until one presses 1. For a gas smell, it tells the caller to leave and call 911, and books nothing.</span></li>
         </ul>
       </div>
 
       <div class="group">
-        <h3>When you step in<small>Pass calls around like a real office.</small></h3>
+        <h3>When you step in</h3>
         <div>
           <ul class="items">
             <li><strong>Several phones ring at once</strong><span>Choose who rings, on the app, a mobile number or both. The first to answer gets the call.</span></li>
             <li><strong>Call back from the app</strong><span>Call a customer from your browser. They see your business number, not your cell.</span></li>
-            <li><strong>Hold, then pick it back up</strong><span>Put a caller on hold with music while you check something.</span></li>
-            <li><strong>Warm or blind transfers</strong><span>Talk to a teammate first, or send the call straight through. Try it below.</span></li>
+            <li class="wide"><strong>Hold and transfer</strong><span>Put a caller on hold with music, or pass the call to a teammate, warm or blind. Try it here.</span></li>
           </ul>
           <div class="transfer-demo">
             <div class="app compact">
@@ -220,14 +230,12 @@
       </div>
 
       <div class="group">
-        <h3>After the call<small>What you get.</small></h3>
+        <h3>After the call</h3>
         <ul class="items">
           <li><strong>Every call on record</strong><span>Summary, full transcript and recording, with filters and search.</span></li>
           <li><strong>A home screen that's a to-do list</strong><span>Requests to confirm, callers to return, what callers wanted, and which calls didn't book and why.</span></li>
           <li><strong>A Monday email</strong><span>Last week's calls in a few numbers, every Monday morning. Turn it off any time.</span></li>
-          <li><strong>A sign-in for each person</strong><span>Technicians see only their own jobs and calls. The owner sees everything.</span></li>
-          <li><strong>Team chat</strong><span>A thread for each job, direct messages, and announcements for the whole team.</span></li>
-          <li><strong>Runs in your browser</strong><span>On your phone or your computer. Calls ring in the app while it's open.</span></li>
+          <li><strong>Team chat and a sign-in each</strong><span>A thread for each job and announcements for everyone. Technicians see only their own jobs and calls.</span></li>
         </ul>
       </div>
     </div>
@@ -238,8 +246,8 @@
 <section class="pricing" id="pricing" aria-labelledby="pricing-title">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="pricing-title">What it costs.</h2>
-      <p>Month to month. Try it first with a free demo call to your own phone.</p>
+      <h2 id="pricing-title">Pricing</h2>
+      <p>Monthly plans. Calls past your included minutes come from prepaid credit.</p>
     </div>
 
     <div class="plans">
@@ -297,8 +305,8 @@
         <p class="hint">Every minute counts: calls the receptionist answers, calls your team takes in the app, and calls you make from it. Each call rounds up to the whole minute.</p>
       </div>
       <div>
-        <label for="minutes">Call minutes in a month <output class="minutes" id="minutes-out" for="minutes">200</output></label>
-        <input class="range" type="range" id="minutes" min="0" max="800" step="10" value="200">
+        <label for="minutes">Call minutes in a month <output class="minutes" id="minutes-out" for="minutes">60</output></label>
+        <input class="range" type="range" id="minutes" min="0" max="800" step="10" value="60">
         <div class="range-scale" aria-hidden="true"><span>0</span><span>400</span><span>800</span></div>
         <ul class="totals" id="totals">
           <li data-plan="personal"><span class="p">Personal</span><span class="v">$101.99</span><span class="why">$11.99 plus 200 minutes of credit</span></li>
@@ -320,7 +328,7 @@
 <section class="faq" id="questions" aria-labelledby="faq-title">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="faq-title">Questions people ask first.</h2>
+      <h2 id="faq-title">Questions people ask first</h2>
       <p>The fastest way to judge the voice is the demo call. It rings your phone.</p>
     </div>
     <div class="qa">
@@ -346,7 +354,7 @@
       </details>
       <details>
         <summary>Are calls recorded?<span class="pm" aria-hidden="true"></span></summary>
-        <div class="a"><p>Every answered call starts with a recording notice. If the caller doesn't agree, nothing is kept.</p><p>Recordings play from the call's page, next to the transcript, and are kept for a year. You can delete one sooner.</p></div>
+        <div class="a"><p>Every answered call starts with a recording notice. If a caller says they don't want to be recorded, the recording is deleted.</p><p>Recordings play from the call's page, next to the transcript, and are kept for a year. You can delete one sooner.</p></div>
       </details>
       <details>
         <summary>Will it put jobs on my calendar?<span class="pm" aria-hidden="true"></span></summary>
@@ -382,9 +390,9 @@
     </div>
     <nav aria-label="Footer">
       <ul>
-        <li><a href="#the-call">How it answers</a></li>
+        <li><a href="#the-call">The call</a></li>
         <li><a href="#who">Who it's for</a></li>
-        <li><a href="#features">What it handles</a></li>
+        <li><a href="#features">Features</a></li>
         <li><a href="#pricing">Pricing</a></li>
         <li><a href="#questions">Questions</a></li>
         <li><a data-app href="#get-started">Sign in</a></li>
