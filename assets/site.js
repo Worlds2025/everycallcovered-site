@@ -55,12 +55,6 @@
           ? (m ? `$11.99 plus ${m} minutes of credit` : "$11.99, no calls")
           : over ? `${over} minutes past the ${p.included} included` : `Inside the ${p.included} included`;
       }
-      const best = totals.business <= totals.growth ? "business" : "growth";
-      $$("#totals li").forEach(li => {
-        const on = li.dataset.plan === best;
-        li.classList.toggle("best", on);
-        if (on) $(".why", li).insertAdjacentHTML("afterbegin", '<span class="best-note">Lower of the two business plans. </span>');
-      });
     };
     range.addEventListener("input", render);
     render();
@@ -243,18 +237,21 @@
   const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
   const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+  const lineProgress = $("#line-progress"), nowChapter = $("#now-chapter");
   const setClock = s => {
     clock.textContent = fmt(s);
     const cardClock = $("[data-clock]", appMain);
     if (cardClock) cardClock.textContent = fmt(s);
-    progress.style.width = Math.min(100, (s / total()) * 100) + "%";
+    const w = Math.min(100, (s / total()) * 100) + "%";
+    progress.style.width = w;
+    lineProgress.style.width = w;
   };
 
   const setPlayButton = mode => {
     status = mode;
     const map = { idle: ["i-play", "Play"], playing: ["i-pause", "Pause"], paused: ["i-play", "Resume"], ended: ["i-replay", "Play again"] };
     const [icon, label] = map[mode];
-    playBtn.innerHTML = `<svg aria-hidden="true"><use href="#${icon}"/></svg><span>${label}</span>`;
+    playBtn.innerHTML = `<svg aria-hidden="true"><use href="#${icon}"/></svg><span class="play-label">${label}</span>`;
   };
 
   const setLine = state => {
@@ -271,6 +268,7 @@
   };
 
   const setChapter = ch => {
+    nowChapter.textContent = ch < 0 ? "" : sc.chapters[ch];
     $$("button", chaptersEl).forEach((b, i) => {
       if (i === ch) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current");
       b.classList.toggle("done", i < ch);
@@ -395,7 +393,7 @@
     }
     setPlayButton("ended");
     setChapter(sc.chapters.length - 1);
-    progress.style.width = "100%";
+    progress.style.width = lineProgress.style.width = "100%";
   }
 
   const reset = () => {
@@ -425,7 +423,7 @@
     sc.steps.forEach(instant);
     setClock(total());
     setChapter(sc.chapters.length - 1);
-    progress.style.width = "100%";
+    progress.style.width = lineProgress.style.width = "100%";
     setPlayButton("ended");
   };
 
@@ -454,9 +452,7 @@
       const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
       if (!d) return;
       e.preventDefault();
-      const next = tabs[(i + d + tabs.length) % tabs.length];
-      next.focus();
-      load(next.dataset.scenario, true);
+      tabs[(i + d + tabs.length) % tabs.length].focus();
     });
   });
 
@@ -478,6 +474,10 @@
     const b = e.target.closest("button[data-ch]");
     if (b) jump(Number(b.dataset.ch));
   });
+
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(() => { if (line.dataset.state === "ended") transcript.scrollTop = transcript.scrollHeight; }).observe(transcript);
+  }
 
   $("#to-app").addEventListener("click", () => {
     $("#app").scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "start" });

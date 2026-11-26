@@ -78,12 +78,12 @@
     </div>
 
     <div class="night-log">
-      <h2>Overnight at Rivera Appliance <small>Demo data</small></h2>
+      <div class="log-head"><h2>Overnight at Rivera Appliance</h2><span>Demo data</span></div>
       <ol class="log" id="log">
-        <li><div class="row"><time>7:16 PM</time><span class="who">Linda Chen</span><span class="what">Bosch dishwasher isn't draining. Wants Thursday morning.</span><span class="tagline"><span class="tag dark">Needs confirmation</span></span></div></li>
-        <li><div class="row"><time>10:12 PM</time><span class="who">Carlos Romero</span><span class="what">Washer leaking onto the floor. Ana Rivera, on call, took it.</span><span class="tagline"><span class="tag alarm">Emergency</span></span></div></li>
-        <li><div class="row"><time>11:58 PM</time><span class="who num">(617) 555-0142</span><span class="what">Asked if you work on Sub-Zero fridges. Wants a call back.</span><span class="tagline"><span class="tag dark">Call back</span></span></div></li>
-        <li><div class="row"><time>6:41 AM</time><span class="who">Priya Shah</span><span class="what">Upset the technician was late on Friday. Wants a call today.</span><span class="tagline"><span class="tag bad">Unhappy caller</span></span></div></li>
+        <li><div class="row"><time datetime="19:16">7:16 PM</time><span class="who">Linda Chen</span><span class="what">Bosch dishwasher isn't draining. Wants Thursday morning.</span><span class="tagline"><span class="tag dark">Needs confirmation</span></span></div></li>
+        <li><div class="row"><time datetime="22:12">10:12 PM</time><span class="who">Carlos Romero</span><span class="what">Washer leaking onto the floor. Ana Rivera, on call, took it.</span><span class="tagline"><span class="tag alarm">Emergency</span></span></div></li>
+        <li><div class="row"><time datetime="23:58">11:58 PM</time><span class="who num">(617) 555-0142</span><span class="what">Asked if you work on Sub-Zero fridges. Wants a call back.</span><span class="tagline"><span class="tag dark">Call back</span></span></div></li>
+        <li><div class="row"><time datetime="06:41">6:41 AM</time><span class="who">Priya Shah</span><span class="what">Upset the technician was late on Friday. Wants a call today.</span><span class="tagline"><span class="tag bad">Unhappy caller</span></span></div></li>
       </ol>
       <p class="log-more"><a class="link" href="#the-call">Watch two of these calls play out</a></p>
     </div>
@@ -102,10 +102,10 @@
         <div class="scenarios" role="tablist" aria-label="Example calls">
           <button role="tab" id="tab-repair" aria-selected="true" aria-controls="stage" data-scenario="repair"><span class="wide-only">A repair request</span><span class="narrow-only">Repair</span></button>
           <button role="tab" id="tab-emergency" aria-selected="false" aria-controls="stage" data-scenario="emergency" tabindex="-1"><span class="wide-only">An emergency at 10 PM</span><span class="narrow-only">Emergency</span></button>
-          <button role="tab" id="tab-scam" aria-selected="false" aria-controls="stage" data-scenario="scam" tabindex="-1"><span class="wide-only">A scam call, Personal plan</span><span class="narrow-only">Scam, Personal</span></button>
+          <button role="tab" id="tab-scam" aria-selected="false" aria-controls="stage" data-scenario="scam" tabindex="-1"><span class="wide-only">A scam call, Personal plan</span><span class="narrow-only">Scam call</span></button>
         </div>
         <div class="transport">
-          <button class="ghost" id="play" type="button"><svg aria-hidden="true"><use href="#i-play"/></svg><span>Play</span></button>
+          <button class="ghost" id="play" type="button"><svg aria-hidden="true"><use href="#i-play"/></svg><span class="play-label">Play</span></button>
         </div>
       </div>
 
@@ -117,6 +117,7 @@
             <span class="line-num" id="line-num">Your business line</span>
             <span class="clock" id="clock" aria-hidden="true">0:00</span>
             <span class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            <span class="now" aria-hidden="true"><span class="bar"><i id="line-progress"></i></span><span id="now-chapter"></span></span>
           </div>
           <div class="transcript" id="transcript" role="log" aria-live="off" aria-label="Transcript" tabindex="0"></div>
           <button class="ghost to-app" id="to-app" type="button">See where it landed in the app</button>
@@ -139,7 +140,7 @@
         <ol class="chapter-list" id="chapters" aria-label="Parts of the call"></ol>
       </div>
       <p class="sr-only" aria-live="polite" id="announce"></p>
-      <p class="demo-note">These calls use demo data and are written to show how the receptionist handles each kind of call. The screens on the right are rebuilt from the app.</p>
+      <p class="demo-note">These calls use demo data and are written to show how the receptionist handles each kind of call. The app screens are rebuilt from the real app.</p>
     </div>
   </div>
 </section>
@@ -157,12 +158,6 @@
         <li>Remodeling</li><li>Carpet cleaning</li><li>Residential cleaning</li><li>Commercial cleaning</li>
         <li>Commercial appliances</li><li>Junk removal</li><li>Moving</li><li>Home inspection</li>
       </ul>
-      <div class="biz-points">
-        <div><h3>Sounds like your front desk</h3><p>Your greeting, your hours, your services. Short replies, and it stops talking when the caller cuts in.</p></div>
-        <div><h3>Nothing booked behind your back</h3><p>Every request waits for you to confirm, edit, assign or decline it.</p></div>
-        <div><h3>Your team on one line</h3><p>Owner, office and technicians each sign in and see what their role allows, with team chat for every job.</p></div>
-        <div><h3>Gets a person when it matters</h3><p>Emergencies go to your on-call people. Callers who ask for someone can be put through.</p></div>
-      </div>
     </div>
 
     <aside class="me" aria-labelledby="me-title">
@@ -170,7 +165,7 @@
       <p class="intro">The Personal plan answers the calls you can't or won't take, and lets the right ones through.</p>
       <div class="me-points">
         <div><h3>Screens spam and scam calls</h3><p>Sales calls turned away if you like. A suspected scam is noted with the reason, and what to do if you already paid.</p></div>
-        <div><h3>Your people always get through</h3><p>Put family on "Always ring me." Numbers on "Never answer" are turned away. Everyone else reaches your assistant.</p></div>
+        <div><h3>Family always gets through</h3><p>Put them on “Always ring me.” Numbers on “Never answer” are turned away. Everyone else reaches your assistant.</p></div>
         <div><h3>Messages worth reading</h3><p>Who called, their number, what it's about and whether it's urgent. A caller who claims an emergency is checked first, with your family code word if you set one.</p></div>
         <div><h3>Creator mode</h3><p>Brand and sponsorship calls are taken down, never agreed to. Harassing calls are ended and flagged.</p></div>
       </div>
@@ -179,6 +174,7 @@
         <div class="mini-row"><span class="n">Maya Kim</span><span class="tag ok">Always rings</span><span class="d">On your always-ring list. Your phone rang.</span></div>
         <div class="mini-row"><span class="n num">(857) 555-0190</span><span class="tag warn">Suspected scam</span><span class="d">Said your car warranty is expiring and asked for your card number. Your assistant ended the call.</span></div>
       </div>
+      <p class="me-more"><a class="link" href="#pricing">Personal is $11.99 a month. See the plan</a></p>
     </aside>
   </div>
 </section>
@@ -193,10 +189,10 @@
       <div class="group">
         <h3>On the call</h3>
         <ul class="items">
-          <li><strong>Your name, your greeting</strong><span>It answers as your business, with your hours and services, and plays the recording notice first.</span></li>
-          <li><strong>Honest about what it is</strong><span>It never claims to be a person. Asked directly, it says it's your virtual assistant.</span></li>
-          <li><strong>The caller's language</strong><span>It answers callers in the language they speak. Your notes stay in English.</span></li>
-          <li><strong>Your trade's questions</strong><span>The appliance and brand, the address, a good time. Each trade asks its own.</span></li>
+          <li><strong>Answers in your name</strong><span>It greets callers as your business, knows your hours and services, and plays the recording notice first.</span></li>
+          <li><strong>Replies in the caller's language</strong><span>A caller who speaks Spanish hears Spanish back. Your notes stay in English.</span></li>
+          <li><strong>Asks what your trade needs</strong><span>For appliance repair: the appliance, the brand, the address and a good time. Each trade asks its own questions.</span></li>
+          <li><strong>Says what it is</strong><span>It doesn't pretend to be a person. Asked, it says it's your virtual assistant.</span></li>
           <li class="wide"><strong>Emergencies go to a person</strong><span>Your trade's emergency list, plus your own. It gives the safety step first, checks the problem is happening now, takes the address, then calls your on-call people in order until one presses 1. For a gas smell, it tells the caller to leave and call 911, and books nothing.</span></li>
         </ul>
       </div>
@@ -264,7 +260,7 @@
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>1 sign-in</span></li>
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Screening, messages and your ring lists</span></li>
             </ul>
-            <a class="btn" data-app href="#get-started">Start with a demo call</a>
+            <a class="btn quiet" data-app href="#get-started">Get a demo call</a>
           </div>
         </div>
       </div>
@@ -281,7 +277,7 @@
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>2 sign-ins</span></li>
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Extra sign-ins $10 a month each</span></li>
             </ul>
-            <a class="btn" data-app href="#get-started">Start with a demo call</a>
+            <a class="btn quiet" data-app href="#get-started">Get a demo call</a>
           </div>
           <div class="plan">
             <h4>Growth</h4>
@@ -293,7 +289,7 @@
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>5 sign-ins</span></li>
               <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Extra sign-ins $10 a month each</span></li>
             </ul>
-            <a class="btn" data-app href="#get-started">Start with a demo call</a>
+            <a class="btn quiet" data-app href="#get-started">Get a demo call</a>
           </div>
         </div>
       </div>
@@ -303,14 +299,15 @@
       <div>
         <h3>What would a month cost you?</h3>
         <p class="hint">Every minute counts: calls the receptionist answers, calls your team takes in the app, and calls you make from it. Each call rounds up to the whole minute.</p>
+        <p class="hint">Personal is for one person. A business chooses Business or Growth.</p>
       </div>
       <div>
         <label for="minutes">Call minutes in a month <output class="minutes" id="minutes-out" for="minutes">60</output></label>
         <input class="range" type="range" id="minutes" min="0" max="800" step="10" value="60">
         <div class="range-scale" aria-hidden="true"><span>0</span><span>400</span><span>800</span></div>
         <ul class="totals" id="totals">
-          <li data-plan="personal"><span class="p">Personal</span><span class="v">$101.99</span><span class="why">$11.99 plus 200 minutes of credit</span></li>
-          <li data-plan="business"><span class="p">Business</span><span class="v">$84.50</span><span class="why">50 minutes past the 150 included</span></li>
+          <li data-plan="personal"><span class="p">Personal</span><span class="v">$38.99</span><span class="why">$11.99 plus 60 minutes of credit</span></li>
+          <li data-plan="business"><span class="p">Business</span><span class="v">$65.00</span><span class="why">Inside the 150 included</span></li>
           <li data-plan="growth"><span class="p">Growth</span><span class="v">$119.00</span><span class="why">Inside the 400 included</span></li>
         </ul>
       </div>
@@ -318,7 +315,7 @@
 
     <div class="good-to-know">
       <div><h4>$10 of calls to start</h4><p>After your first payment we add $10 of call credit. It's for calls only and expires after 30 days.</p></div>
-      <div><h4>No free trial, a real demo</h4><p>Your number goes live once your first payment goes through. Before that, the demo rings your own phone: three calls, up to three minutes each.</p></div>
+      <div><h4>No free trial, a real demo</h4><p>Your number goes live once your first payment goes through. Before that, you get three demo calls of up to three minutes each, with the transcript of each.</p></div>
       <div><h4>Minutes and credit</h4><p>Included minutes reset each month and don't roll over. Credit is prepaid, and auto top-up can add more when it runs low.</p></div>
     </div>
   </div>
@@ -329,16 +326,15 @@
   <div class="wrap">
     <div class="section-head">
       <h2 id="faq-title">Questions people ask first</h2>
-      <p>The fastest way to judge the voice is the demo call. It rings your phone.</p>
     </div>
     <div class="qa">
       <details>
         <summary>Does it sound like a robot?<span class="pm" aria-hidden="true"></span></summary>
-        <div class="a"><p>It talks in short turns at a normal pace, stops when the caller cuts in, and doesn't repeat the same question word for word. It never says "as an AI."</p><p>It also never pretends to be a person. If a caller asks, it says it's your virtual assistant.</p></div>
+        <div class="a"><p>It's built to sound like a trained front desk: short turns at a normal pace, and it stops talking when the caller cuts in.</p><p>The quickest way to judge the voice is the demo call, which rings your own phone.</p></div>
       </details>
       <details>
         <summary>Can I keep my phone number?<span class="pm" aria-hidden="true"></span></summary>
-        <div class="a"><p>Yes. You get a new local number for the line, and you forward your current number to it. Setup shows the forwarding steps for Verizon, AT&amp;T, T-Mobile, office and home lines, plus a way that works with any phone company.</p><p>Nothing is ported, and no phone-company PIN is needed.</p></div>
+        <div class="a"><p>Yes. You get a new local number for the line, and you forward your current number to it. Setup shows the forwarding steps for Verizon, AT&amp;T, T-Mobile, office and home lines, plus general steps for any other phone company.</p><p>Nothing is ported, and no phone-company PIN is needed.</p></div>
       </details>
       <details>
         <summary>What happens in an emergency?<span class="pm" aria-hidden="true"></span></summary>
@@ -359,10 +355,6 @@
       <details>
         <summary>Will it put jobs on my calendar?<span class="pm" aria-hidden="true"></span></summary>
         <div class="a"><p>No. Every request lands in your inbox as "Needs confirmation." You confirm, edit, assign or decline it. Nothing is scheduled on its own, and confirming never texts the customer.</p></div>
-      </details>
-      <details>
-        <summary>Is there a free trial?<span class="pm" aria-hidden="true"></span></summary>
-        <div class="a"><p>No trial, but a free demo. Sign up, tell it how your calls should be answered, and it calls your phone. You play a customer and it plays your receptionist. You get three demo calls of up to three minutes each, and the transcript of each one.</p></div>
       </details>
     </div>
   </div>
