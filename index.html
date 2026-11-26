@@ -2,535 +2,398 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Every Call Covered: the phone assistant for trade businesses</title>
-<meta name="description" content="A phone assistant for trade businesses that sounds like your front desk, captures every job, and shows you what needs you. Emergencies reach your on-call person right away. Launching soon.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Every Call Covered: an AI receptionist that answers in your name</title>
+<meta name="description" content="Every Call Covered answers your phone in your business's name, day and night. It takes the job down, sends emergencies to a person, and puts every call in your app with the transcript. Plans for trade businesses and for individuals.">
+<!-- The app's address. Every sign-up, demo and sign-in link on this page takes it from here (assets/site.js). -->
+<meta name="ecc-app-url" content="https://every-call-covered.replit.app/sign-in">
 <meta name="theme-color" content="#14244b">
 <meta property="og:title" content="Every Call Covered">
-<meta property="og:description" content="Every call answered. Every job captured. A phone assistant for trade businesses, launching soon.">
+<meta property="og:description" content="An AI receptionist that answers in your name, day and night, and puts every call in your app.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://everycallcovered.com/">
 <link rel="canonical" href="https://everycallcovered.com/">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    /* Color system: navy base, one amber accent. */
-    --night: #14244b;
-    --night-deep: #0d1836;
-    --amber: #f2a93b;
-    --amber-ink: #8a5208;   /* amber text on light surfaces */
-    --moon: #e7ecf8;        /* text on navy */
-    --dim: #a9b4d3;
-    --rule-dim: rgba(169, 180, 211, .25);
-    --alarm: #b8400f;       /* emergencies only; white text passes 4.5:1 */
-    --on-alarm: #fff8f2;
-    --paper: #f7e58a;       /* the work order only */
-    --paper-edge: #e9d36b;
-    --ink: #1f3b8f;
-    --ink-2: #6b6440;
-    --ink-3: #3a3a2a;
-
-    /* Type scale */
-    --fs--2: .75rem;
-    --fs--1: .875rem;
-    --fs-0: 1.0625rem;
-    --fs-1: 1.25rem;
-    --fs-2: 1.5rem;
-    --fs-3: clamp(2.1rem, 4.6vw, 3.6rem);
-    --fs-4: clamp(3rem, 7.4vw, 6.4rem);
-
-    /* Spacing */
-    --space-s: .75rem;
-    --space-m: 1.25rem;
-    --space-l: 2.5rem;
-    --space-xl: 5rem;
-    --measure: 68ch;
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    background: var(--night);
-    color: var(--moon);
-    font-family: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
-    font-size: var(--fs-0);
-    line-height: 1.55;
-    font-variation-settings: "wdth" 100;
-  }
-  a { color: inherit; }
-  :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
-  .wrap { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
-
-  /* Header */
-  .top { padding: var(--space-m) 0; }
-  .top .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-  .mark { display: flex; align-items: center; gap: .6rem; font-weight: 800; font-variation-settings: "wdth" 80; font-size: var(--fs-1); text-decoration: none; }
-  .mark svg { flex: none; }
-  .soon { font-size: var(--fs--1); color: var(--dim); }
-
-  /* Headings */
-  h1, h2.big { font-weight: 900; line-height: .95; word-spacing: .12em; margin: 0; }
-  h1 { font-variation-settings: "wdth" 66; font-size: var(--fs-4); letter-spacing: -.01em; margin-bottom: var(--space-m); }
-  h1 span { display: block; }
-  h1 span + span { color: var(--amber); }
-  h2.big { font-variation-settings: "wdth" 70; font-size: var(--fs-3); max-width: 18ch; margin-bottom: var(--space-m); }
-  h3 { margin: 0 0 .4rem; font-size: var(--fs-1); font-weight: 800; line-height: 1.25; }
-
-  /* Hero */
-  .hero { padding: var(--space-l) 0 var(--space-xl); overflow-x: clip; } /* the landing work order starts tilted */
-  .hero .wrap { display: grid; grid-template-columns: 1.15fr .85fr; gap: 3.5rem; align-items: center; }
-  .lede { max-width: 34ch; font-size: var(--fs-1); line-height: 1.45; margin: 0 0 var(--space-m); }
-  .launch { margin: 0; color: var(--amber); font-weight: 700; }
-
-  /* The work order */
-  .ticket {
-    position: relative;
-    background: var(--paper);
-    color: var(--ink);
-    padding: 1.6rem 1.6rem 1.3rem;
-    border-radius: 3px;
-    transform: rotate(2.2deg);
-    box-shadow: 0 1px 0 var(--paper-edge), 0 24px 50px -20px rgba(0, 0, 0, .55);
-    max-width: 26rem;
-    justify-self: end;
-    width: 100%;
-  }
-  .ticket::before { /* perforated top edge */
-    content: ""; position: absolute; left: 0; right: 0; top: -7px; height: 14px;
-    background: radial-gradient(circle at 7px 7px, var(--night) 4px, transparent 4.5px) 0 0 / 18px 14px repeat-x;
-  }
-  .ticket h2 { margin: 0 0 1rem; font-size: var(--fs-0); font-weight: 800; font-variation-settings: "wdth" 75; color: var(--ink-3); display: flex; justify-content: space-between; gap: 1rem; }
-  .ticket h2 small { font-weight: 500; color: var(--ink-2); font-size: var(--fs--1); }
-  .ticket dl { margin: 0; display: grid; grid-template-columns: 7.2rem 1fr; }
-  .ticket dt, .ticket dd { border-top: 1px solid rgba(58, 58, 42, .25); padding: .55rem 0; }
-  .ticket dt { color: var(--ink-2); font-size: var(--fs--1); }
-  .ticket dd { margin: 0; font-weight: 600; line-height: 1.35; }
-  .stamp {
-    margin-top: 1.1rem; display: inline-block; padding: .3rem .65rem; border: 4px double var(--ink);
-    border-radius: 4px; font-weight: 800; font-size: var(--fs--1); text-transform: uppercase; letter-spacing: .06em;
-    font-variation-settings: "wdth" 80; transform: rotate(-3deg); opacity: .85;
-  }
-  .ticket p.note { margin: .9rem 0 0; font-size: var(--fs--2); color: var(--ink-2); }
-
-  /* Sections */
-  section { padding: var(--space-xl) 0; }
-  .copy { max-width: var(--measure); }
-  .copy p { margin: 0 0 1rem; }
-  .problem, .how, .insights, .features { background: var(--night-deep); }
-
-  .three { margin-top: var(--space-l); display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-l); }
-  .three h3 { color: var(--amber); }
-  .three p { margin: 0; }
-
-  .steps { list-style: none; margin: var(--space-l) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-l); counter-reset: step; }
-  .steps li { counter-increment: step; border-top: 3px solid var(--amber); padding-top: 1.1rem; }
-  .steps li::before { content: counter(step); display: block; font-weight: 900; font-variation-settings: "wdth" 66; font-size: var(--fs-3); line-height: 1; color: var(--amber); margin-bottom: .6rem; }
-  .steps p { margin: 0; color: var(--dim); }
-
-  .emergency { background: var(--alarm); color: var(--on-alarm); }
-  .emergency .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-  .emergency ul { margin: 0; padding: 0; list-style: none; font-weight: 700; font-size: var(--fs-1); }
-  .emergency li { padding: .75rem 0; border-bottom: 2px solid rgba(255, 248, 242, .35); }
-  .emergency li:last-child { border-bottom: 0; }
-  .emergency li small { display: block; font-weight: 500; font-size: var(--fs--1); }
-
-  .languages h2.big { max-width: 22ch; }
-  .tongues { margin: var(--space-l) 0 var(--space-m); display: flex; flex-wrap: wrap; gap: .35rem 1.4rem; font-size: var(--fs-2); font-weight: 700; line-height: 1.35; }
-  .languages .fine { color: var(--dim); max-width: var(--measure); margin: 0; }
-
-  .features ul { margin: var(--space-l) 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 3rem; max-width: 60rem; }
-  .features li { padding: 1.1rem 0; border-top: 1px solid var(--rule-dim); }
-  .features strong { display: block; font-size: var(--fs-1); margin-bottom: .2rem; }
-  .features span { color: var(--dim); }
-
-  .product .shots { margin-top: var(--space-l); display: grid; grid-template-columns: 1.08fr .92fr; gap: 2rem; align-items: start; }
-  .insights .wrap { display: grid; grid-template-columns: .9fr 1.1fr; gap: 3rem; align-items: center; }
-  figure { margin: 0; }
-  figcaption { margin-top: .8rem; font-size: var(--fs--1); color: var(--dim); }
-
-  /* Product visuals: HTML/CSS in the console's components, on the site's colors.
-     They are the design reference for the web console and Android app (plan §0.3). */
-  .ui {
-    --c-bg: hsl(38 33% 94%); --c-card: hsl(40 40% 97%); --c-fg: #14244b; --c-primary: var(--night);
-    --c-primary-fg: #f8f5ef; --c-border: hsl(34 20% 82%); --c-secondary: hsl(36 28% 88%);
-    --c-muted-fg: #5e6577; --c-bad: #b3261e;
-    background: var(--c-bg); color: var(--c-fg); border-radius: 14px; overflow: hidden;
-    font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: .9375rem; line-height: 1.45;
-    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6); border: 1px solid rgba(255, 255, 255, .08);
-  }
-  .ui .bar { padding: .7rem 1.1rem; background: var(--night); font: 500 var(--fs--2) "IBM Plex Mono", monospace; color: hsl(38 33% 82%); letter-spacing: .04em; }
-  .ui .body { padding: 1.3rem; }
-  .ui .kicker { font: 500 var(--fs--2) "IBM Plex Mono", monospace; text-transform: uppercase; letter-spacing: .18em; color: var(--amber-ink); }
-  .ui .title { margin: .15rem 0 0; font-size: var(--fs-2); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
-  .ui .sub { margin-top: .25rem; font: var(--fs--2) "IBM Plex Mono", monospace; color: var(--c-muted-fg); }
-  .ui .head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .8rem; }
-  .ui .tags, .ui .facts { display: flex; flex-wrap: wrap; gap: .35rem; align-content: flex-start; }
-  .ui .tag { display: inline-flex; align-items: center; border: 1px solid; border-radius: 999px; padding: .1rem .55rem;
-    font: 500 var(--fs--2) "IBM Plex Mono", monospace; letter-spacing: .02em; white-space: nowrap; }
-  .ui .ok { background: hsl(158 35% 38% / .12); color: hsl(158 40% 26%); border-color: hsl(158 35% 38% / .3); }
-  .ui .bad { background: rgba(179, 38, 30, .08); color: var(--c-bad); border-color: rgba(179, 38, 30, .3); }
-  .ui .info { background: rgba(242, 169, 59, .16); color: var(--amber-ink); border-color: rgba(242, 169, 59, .55); }
-  .ui .muted { background: var(--c-secondary); color: var(--c-muted-fg); border-color: var(--c-border); }
-  .ui .card, .ui .inbox { margin-top: 1rem; background: var(--c-card); border: 1px solid var(--c-border); border-radius: 12px; }
-  .ui .card { padding: 1rem 1.1rem; }
-  .ui .inbox { overflow: hidden; }
-  .ui .card-title, .ui .label { font-weight: 700; }
-  .ui .summary { margin: .35rem 0 0; color: var(--c-muted-fg); }
-  .ui dl { margin: .9rem 0 0; padding-top: .8rem; border-top: 1px solid var(--c-border); display: grid; grid-template-columns: 1fr 1fr; gap: .7rem 1rem; }
-  .ui dt { font: var(--fs--2) "IBM Plex Mono", monospace; color: var(--c-muted-fg); }
-  .ui dd { margin: .1rem 0 0; font-weight: 600; }
-  .ui dl .wide { grid-column: 1 / -1; }
-  .ui dl .wide dd { font-weight: 400; }
-  .ui .lines { margin-top: .8rem; display: grid; gap: .55rem; }
-  .ui .line { display: flex; gap: .6rem; align-items: flex-start; }
-  .ui .line time { width: 2.2rem; flex: none; padding-top: .3rem; font: var(--fs--2) "IBM Plex Mono", monospace; color: var(--c-muted-fg); }
-  .ui .line p { margin: 0; max-width: 82%; border-radius: 12px; padding: .45rem .75rem; font-size: var(--fs--1); }
-  .ui .agent p { background: var(--c-primary); color: var(--c-primary-fg); }
-  .ui .caller { flex-direction: row-reverse; text-align: right; }
-  .ui .caller p { background: var(--c-secondary); }
-  .ui .job { padding: .95rem 1.05rem; border-bottom: 1px solid var(--c-border); }
-  .ui .job:last-child { border-bottom: 0; }
-  .ui .slim { padding: .75rem 1.05rem; }
-  .ui .job-top { display: flex; justify-content: space-between; gap: .6rem; align-items: baseline; }
-  .ui .job-name { font-weight: 700; overflow-wrap: anywhere; }
-  .ui .dot { display: inline-block; width: .45rem; height: .45rem; margin-left: .35rem; border-radius: 50%; background: var(--amber); vertical-align: middle; }
-  .ui .when { font: var(--fs--2) "IBM Plex Mono", monospace; color: var(--c-muted-fg); white-space: nowrap; }
-  .ui .job-what { margin: .2rem 0 .5rem; font-size: var(--fs--1); color: var(--c-muted-fg); }
-  .ui .actions { margin-top: .7rem; display: flex; flex-wrap: wrap; gap: .4rem; }
-  .ui .btn { flex: none; cursor: default; border-radius: 8px; padding: .32rem .75rem; font-size: var(--fs--1); font-weight: 600; border: 1px solid var(--c-border); color: var(--c-fg); }
-  .ui .btn.primary { background: var(--c-primary); border-color: var(--c-primary); color: var(--c-primary-fg); }
-  .ui .title.small { margin-top: 1.1rem; font-size: var(--fs-1); }
-  .ui .rows { margin-top: .35rem; display: grid; grid-template-columns: 1fr auto; gap: .2rem 1rem; font-size: var(--fs--1); color: var(--c-muted-fg); }
-  .ui .rows b { color: var(--c-fg); font: 500 var(--fs--1) "IBM Plex Mono", monospace; text-align: right; }
-  .ui .suggest { border-left: 3px solid var(--amber); background: rgba(242, 169, 59, .08); }
-  .ui .suggest .job-what { margin: 0; color: var(--c-fg); }
-
-  footer { padding: 3rem 0 3.5rem; color: var(--dim); }
-  footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-  footer b { color: var(--moon); }
-
-  /* One orchestrated moment: the work order lands. */
-  @media (prefers-reduced-motion: no-preference) {
-    .ticket { animation: land .9s cubic-bezier(.2, .8, .2, 1) .25s both; }
-    .stamp { animation: stamp .35s ease-out 1.25s both; }
-    @keyframes land { from { opacity: 0; transform: translateY(40px) rotate(7deg); } to { opacity: 1; transform: rotate(2.2deg); } }
-    @keyframes stamp { from { opacity: 0; transform: scale(1.6) rotate(-3deg); } to { opacity: .85; transform: scale(1) rotate(-3deg); } }
-  }
-
-  @media (max-width: 860px) {
-    .hero .wrap, .emergency .wrap, .three, .steps, .product .shots, .insights .wrap { grid-template-columns: 1fr; gap: 2rem; }
-    .ticket { justify-self: start; transform: rotate(1.2deg); }
-    .features ul { grid-template-columns: 1fr; }
-    .ui dl { grid-template-columns: 1fr; }
-    .ui .line p { max-width: 100%; }
-    section { padding: 3.75rem 0; }
-    .hero { padding: 2rem 0 3.75rem; }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
-<header class="top">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#f2a93b"/><path d="M10.6 7.5c.9-.4 1.9 0 2.3.8l1.6 3.4c.4.8.2 1.7-.5 2.3l-1.5 1.2a11.6 11.6 0 0 0 4.3 4.3l1.2-1.5c.6-.7 1.5-.9 2.3-.5l3.4 1.6c.8.4 1.2 1.4.8 2.3l-.7 1.6c-.6 1.3-2 2.1-3.4 1.8C13.9 23.6 8.4 18.1 7.3 11.6c-.3-1.4.5-2.8 1.8-3.4z" fill="#14244b"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path fill="currentColor" d="M6 4h4v16H6zM14 4h4v16h-4z"/></symbol>
+  <symbol id="i-replay" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M4 12.5l5 5L20 6.5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM12 8v4M12 16h.01"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to the content</a>
+
+<header class="site-head" id="top">
   <div class="wrap">
-    <a class="mark" href="/" aria-label="Every Call Covered home">
-      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#f2a93b"/><path d="M10.6 7.5c.9-.4 1.9 0 2.3.8l1.6 3.4c.4.8.2 1.7-.5 2.3l-1.5 1.2a11.6 11.6 0 0 0 4.3 4.3l1.2-1.5c.6-.7 1.5-.9 2.3-.5l3.4 1.6c.8.4 1.2 1.4.8 2.3l-.7 1.6c-.6 1.3-2 2.1-3.4 1.8C13.9 23.6 8.4 18.1 7.3 11.6c-.3-1.4.5-2.8 1.8-3.4z" fill="#14244b"/></svg>
-      Every Call Covered
-    </a>
-    <span class="soon">Launching soon</span>
+    <a class="brand" href="/" aria-label="Every Call Covered, home"><svg aria-hidden="true"><use href="#i-mark"/></svg><span>Every Call Covered</span></a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#the-call">How it answers</a>
+      <a href="#who">Who it's for</a>
+      <a href="#features">What it handles</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#questions">Questions</a>
+    </nav>
+    <div class="head-actions">
+      <a class="signin" data-app href="#get-started">Sign in</a>
+      <a class="btn small" data-app href="#get-started">Get a demo call</a>
+    </div>
   </div>
 </header>
 
-<main>
-  <section class="hero" aria-labelledby="headline">
-    <div class="wrap">
-      <div>
-        <h1 id="headline"><span>Every call answered.</span><span>Every job captured.</span></h1>
-        <p class="lede">A phone assistant for trade businesses that sounds like your front desk. It picks up when you can't, captures the job, and shows you what needs you.</p>
-        <p class="launch">Launching soon for trade businesses in the US.</p>
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <h1 id="hero-title"><span>Your phone,</span> <span class="second">answered.</span></h1>
+    <div class="hero-copy">
+      <p class="lede">An AI receptionist that picks up in your business's name, day and night. It takes the job down, sends emergencies to a real person, and puts every call in your app with the transcript.</p>
+      <p class="lede-2">Not a business? The Personal plan screens your calls, takes messages and lets the right people ring through.</p>
+      <div class="ctas">
+        <a class="btn" data-app href="#get-started" id="hero-cta"><svg aria-hidden="true"><use href="#i-phone"/></svg>Get a demo call</a>
+        <a class="link" href="#pricing">See pricing</a>
       </div>
-
-      <article class="ticket" aria-label="Example of a job request captured after hours">
-        <h2>Job request <small>After hours, 7:16 PM</small></h2>
-        <dl>
-          <dt>Caller</dt><dd>Linda Chen, new customer</dd>
-          <dt>Problem</dt><dd>Bosch dishwasher isn't draining</dd>
-          <dt>Address</dt><dd>9 Orchard Ln, Shelbyville (in your area)</dd>
-          <dt>Best time</dt><dd>Thursday, 8 AM to noon</dd>
-          <dt>Call</dt><dd>Transcript attached</dd>
-        </dl>
-        <span class="stamp">Needs your confirmation</span>
-        <p class="note">An example of what lands in your inbox.</p>
-      </article>
+      <p class="fine">The demo is free. It rings your own phone, and you play the customer.</p>
     </div>
-  </section>
 
-  <section class="problem" aria-labelledby="problem">
-    <div class="wrap">
-      <h2 class="big" id="problem">You can't answer from under a sink.</h2>
-      <div class="copy">
-        <p>When you're on a job, driving between jobs, or done for the day, the phone keeps ringing. A missed call is a lost job. They just call the next number on the list.</p>
-        <p>Turn it on around the clock, or just for evenings, weekends and holidays. No call goes to a voicemail nobody checks.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="pillars" aria-labelledby="pillars">
-    <div class="wrap">
-      <h2 class="big" id="pillars">Sounds like your office, works like your office.</h2>
-      <div class="three">
-        <div>
-          <h3>Talks like a trained receptionist</h3>
-          <p>A natural pace and short answers. It stops talking when a caller cuts in, slows down when someone is upset, and never says “as an AI”. If a caller asks, it tells them it's your virtual assistant.</p>
-        </div>
-        <div>
-          <h3>Tells you what your calls mean</h3>
-          <p>After every call, a three-line summary. Each morning, who to call back and which calls didn't book, and why.</p>
-        </div>
-        <div>
-          <h3>Nothing to figure out</h3>
-          <p>Your home screen shows only what needs you: calls to return, jobs to confirm and today's insights. If a screen takes more than five seconds to understand, we fix the screen.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="how" aria-labelledby="how">
-    <div class="wrap">
-      <h2 class="big" id="how">How it works</h2>
-      <ol class="steps">
-        <li>
-          <h3>It answers every call</h3>
-          <p>Your business number rings through to you when you're available. When you're not, your assistant picks up, in your business's name.</p>
-        </li>
-        <li>
-          <h3>It captures the job</h3>
-          <p>It asks the questions your trade needs and sends you a job request to confirm, with the full transcript.</p>
-        </li>
-        <li>
-          <h3>You stay in control</h3>
-          <p>Confirm, assign or call back from the Android app or the web dashboard. You can take over a live call at any time.</p>
-        </li>
+    <div class="night-log">
+      <h2>Overnight at Rivera Appliance <small>Demo data</small></h2>
+      <ol class="log" id="log">
+        <li><div class="row"><time>7:16 PM</time><span class="who">Linda Chen</span><span class="what">Bosch dishwasher isn't draining. Wants Thursday morning.</span><span class="tagline"><span class="tag dark">Needs confirmation</span></span></div></li>
+        <li><div class="row"><time>10:12 PM</time><span class="who">Carlos Romero</span><span class="what">Washer leaking onto the floor. Ana Rivera, on call, took it.</span><span class="tagline"><span class="tag alarm">Emergency</span></span></div></li>
+        <li><div class="row"><time>11:58 PM</time><span class="who num">(617) 555-0142</span><span class="what">Asked if you work on Sub-Zero fridges. Wants a call back.</span><span class="tagline"><span class="tag dark">Call back</span></span></div></li>
+        <li><div class="row"><time>6:41 AM</time><span class="who">Priya Shah</span><span class="what">Upset the technician was late on Friday. Wants a call today.</span><span class="tagline"><span class="tag bad">Unhappy caller</span></span></div></li>
       </ol>
+      <p class="log-more"><a class="link" href="#the-call">Watch two of these calls play out</a></p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="product" aria-labelledby="product">
-    <div class="wrap">
-      <h2 class="big" id="product">Each call lands as a job you can act on.</h2>
-      <div class="copy">
-        <p>Each call gets a page with a short summary, the details your trade needs, and the full transcript. New job requests, callers to call back and messages collect in one inbox, where you confirm, edit, assign or decline with one tap.</p>
-      </div>
-      <div class="shots">
-        <figure>
-          <div class="ui" role="img" aria-label="Call page for Maria Gonzalez: the ice maker in her Whirlpool fridge stopped making ice, with summary and transcript">
-            <div class="bar" aria-hidden="true">Calls › Maria Gonzalez</div>
-            <div class="body" aria-hidden="true">
-              <div class="head">
-                <div>
-                  <div class="kicker">Inbound call</div>
-                  <div class="title">Maria Gonzalez</div>
-                  <div class="sub">(202) 555-0101 · Nov 24, 8:42 PM · 1:58</div>
-                </div>
-                <div class="tags"><span class="tag ok">Answered by your assistant</span></div>
-              </div>
-              <div class="card">
-                <div class="card-title">Summary</div>
-                <p class="summary">The ice maker in her Whirlpool fridge stopped making ice. The fridge and water dispenser still work. She says it isn't under warranty; the office confirms. Mornings are best.</p>
-                <dl>
-                  <div><dt>Appliance</dt><dd>Refrigerator</dd></div>
-                  <div><dt>Brand</dt><dd>Whirlpool</dd></div>
-                  <div class="wide"><dt>Next step</dt><dd>Confirm a morning visit. Nothing was scheduled automatically.</dd></div>
-                </dl>
-              </div>
-              <div class="card">
-                <div class="card-title">Transcript</div>
-                <div class="lines">
-                  <div class="line agent"><time>0:04</time><p>This call may be recorded for training and business purposes. Thanks for calling Rivera Appliance. How can I help?</p></div>
-                  <div class="line caller"><time>0:09</time><p>Hi, the ice maker in my Whirlpool fridge stopped making ice.</p></div>
-                  <div class="line agent"><time>0:15</time><p>That's a pain. Is the fridge itself still cold?</p></div>
-                  <div class="line caller"><time>0:21</time><p>Yes, the fridge is fine. Just no ice.</p></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <figcaption>The call page in the web dashboard, shown with demo data.</figcaption>
-        </figure>
-
-        <figure>
-          <div class="ui" role="img" aria-label="Inbox: two job requests to confirm, an unhappy caller to call back, a caller who hung up, and a message">
-            <div class="bar" aria-hidden="true">Inbox</div>
-            <div class="body" aria-hidden="true">
-              <div class="kicker">Today</div>
-              <div class="title">Inbox</div>
-              <div class="inbox">
-                <div class="job">
-                  <div class="job-top"><span class="job-name">Maria Gonzalez<span class="dot"></span></span><span class="when">8:42 PM</span></div>
-                  <p class="job-what">Fridge ice maker stopped making ice</p>
-                  <div class="facts"><span class="tag info">Needs confirmation</span><span class="tag muted">Whirlpool</span><span class="tag muted">Mornings</span></div>
-                  <div class="actions"><span class="btn primary">Confirm</span><span class="btn">Edit</span><span class="btn">Assign</span><span class="btn">Decline</span></div>
-                </div>
-                <div class="job">
-                  <div class="job-top"><span class="job-name">Linda Chen<span class="dot"></span></span><span class="when">7:16 PM</span></div>
-                  <p class="job-what">Dishwasher isn't draining</p>
-                  <div class="facts"><span class="tag info">Needs confirmation</span><span class="tag muted">Bosch</span><span class="tag muted">Thursday morning</span></div>
-                  <div class="actions"><span class="btn primary">Confirm</span><span class="btn">Edit</span><span class="btn">Assign</span><span class="btn">Decline</span></div>
-                </div>
-                <div class="job slim">
-                  <div class="job-top"><span class="job-name">Priya Shah</span><span class="when">6:05 PM</span></div>
-                  <p class="job-what">Upset that the technician was late on Friday</p>
-                  <div class="facts"><span class="tag bad">Unhappy caller</span><span class="tag muted">Call back</span></div>
-                </div>
-                <div class="job slim">
-                  <div class="job-top"><span class="job-name">Robert Hayes</span><span class="when">5:51 PM</span></div>
-                  <p class="job-what">Hung up before saying what he needed</p>
-                  <div class="facts"><span class="tag muted">Call back</span></div>
-                </div>
-                <div class="job slim">
-                  <div class="job-top"><span class="job-name">Grace Kim</span><span class="when">1:07 PM</span></div>
-                  <p class="job-what">“Is Thursday morning still open for the freezer?”</p>
-                  <div class="facts"><span class="tag muted">Message</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <figcaption>The job inbox, as designed for launch. Shown with demo data.</figcaption>
-        </figure>
-      </div>
+<section class="call-section" id="the-call" aria-labelledby="call-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="call-title">Watch it take a call.</h2>
+      <p>Pick a call. On the left is the call as it happens. On the right is your app, where the call lands when it ends.</p>
     </div>
-  </section>
 
-  <section class="insights" aria-labelledby="insights">
-    <div class="wrap">
-      <div class="insights-copy">
-        <h2 class="big" id="insights">Your calls, in a few plain lines.</h2>
-        <div class="copy">
-          <p>Each call gets a short summary: what they wanted, how it ended, how they felt. Your home screen turns that into today's short list, and every number opens the calls behind it.</p>
-          <p>Every Monday, a short digest of the week lands in your inbox.</p>
+    <div class="player" id="player">
+      <div class="player-bar">
+        <div class="scenarios" role="tablist" aria-label="Example calls">
+          <button role="tab" id="tab-repair" aria-selected="true" aria-controls="stage" data-scenario="repair">A repair request</button>
+          <button role="tab" id="tab-emergency" aria-selected="false" aria-controls="stage" data-scenario="emergency" tabindex="-1">An emergency at 10 PM</button>
+          <button role="tab" id="tab-scam" aria-selected="false" aria-controls="stage" data-scenario="scam" tabindex="-1">A scam call, Personal plan</button>
+        </div>
+        <div class="transport">
+          <button class="ghost" id="play" type="button"><svg aria-hidden="true"><use href="#i-play"/></svg><span>Play</span></button>
         </div>
       </div>
-      <figure>
-        <div class="ui" role="img" aria-label="Home screen: two callers to call back, two job requests to confirm, today's top requests, calls that didn't book and why, and a suggestion">
-          <div class="bar" aria-hidden="true">Home</div>
-          <div class="body" aria-hidden="true">
-            <div class="kicker">Tuesday</div>
-            <div class="title">Needs you</div>
-            <div class="inbox">
-              <div class="job slim">
-                <div class="job-top"><span class="job-name">Priya Shah</span><span class="btn">Call back</span></div>
-                <p class="job-what">Upset that the technician was late on Friday</p>
-                <div class="facts"><span class="tag bad">Unhappy caller</span></div>
-              </div>
-              <div class="job slim">
-                <div class="job-top"><span class="job-name">Robert Hayes</span><span class="btn">Call back</span></div>
-                <p class="job-what">Hung up before saying what he needed</p>
-              </div>
-              <div class="job slim">
-                <div class="job-top"><span class="job-name">Maria Gonzalez<span class="dot"></span></span><span class="btn primary">Confirm</span></div>
-                <p class="job-what">Fridge ice maker, mornings</p>
-              </div>
-              <div class="job slim">
-                <div class="job-top"><span class="job-name">Linda Chen<span class="dot"></span></span><span class="btn primary">Confirm</span></div>
-                <p class="job-what">Dishwasher isn't draining, Thursday morning</p>
-              </div>
+
+      <div class="stage" id="stage" role="tabpanel" aria-labelledby="tab-repair">
+        <div class="line" id="line" data-state="idle">
+          <div class="line-head">
+            <span class="line-state"><span class="led" aria-hidden="true"></span><span id="line-state">Waiting for a call</span></span>
+            <span class="line-who" id="line-who">Rivera Appliance</span>
+            <span class="line-num" id="line-num">Your business line</span>
+            <span class="clock" id="clock" aria-hidden="true">0:00</span>
+            <span class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </div>
+          <div class="transcript" id="transcript" aria-label="Transcript"></div>
+        </div>
+
+        <div class="app" id="app" aria-label="The app">
+          <aside class="app-side" aria-hidden="true">
+            <div class="biz" id="app-biz">Rivera Appliance<small>Every Call Covered</small></div>
+            <ul id="app-nav"></ul>
+          </aside>
+          <div>
+            <div class="app-top" aria-hidden="true"><span id="app-biz-top">Rivera Appliance<small>Every Call Covered</small></span></div>
+            <div class="app-main" id="app-main"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chapters">
+        <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+        <ol class="chapter-list" id="chapters" aria-label="Parts of the call"></ol>
+      </div>
+      <p class="sr-only" aria-live="polite" id="announce"></p>
+      <p class="demo-note">These calls use demo data and are written to show how the receptionist handles each kind of call. The screens on the right are rebuilt from the app.</p>
+    </div>
+  </div>
+</section>
+
+<div class="light">
+<section class="audience" id="who" aria-labelledby="who-title">
+  <div class="wrap who-grid">
+    <div>
+      <h2 id="who-title">Set up for the trade you're in.</h2>
+      <p class="intro">Pick your trade and it already knows the words your customers use, the questions you'd ask, and what counts as an emergency. You change any of it.</p>
+      <ul class="trades" aria-label="Trades it comes set up for">
+        <li>Appliance repair</li><li>HVAC</li><li>Plumbing</li><li>Electrical</li><li>Garage door</li><li>Roofing</li>
+        <li>Locksmith</li><li>Pest control</li><li>Septic</li><li>Solar</li><li>Pool service</li><li>Landscaping</li>
+        <li>Tree service</li><li>Snow removal</li><li>Chimney sweep</li><li>Handyman</li><li>Painting</li>
+        <li>Remodeling</li><li>Carpet cleaning</li><li>Residential cleaning</li><li>Commercial cleaning</li>
+        <li>Commercial appliances</li><li>Junk removal</li><li>Moving</li><li>Home inspection</li>
+      </ul>
+      <div class="biz-points">
+        <div><h3>Sounds like your front desk</h3><p>Your greeting, your hours, your services. Short replies, and it stops talking when the caller cuts in.</p></div>
+        <div><h3>Nothing booked behind your back</h3><p>Every request waits for you to confirm, edit, assign or decline it. Confirming never texts the customer.</p></div>
+        <div><h3>Your team on one line</h3><p>Owner, office and technicians each sign in and see what their role allows, with team chat for every job.</p></div>
+        <div><h3>Gets a person when it matters</h3><p>Emergencies go to your on-call people. Callers who ask for someone can be put through.</p></div>
+      </div>
+    </div>
+
+    <aside class="me" aria-labelledby="me-title">
+      <h2 id="me-title">Just for you, too.</h2>
+      <p class="intro">The Personal plan answers the calls you can't or won't take, and lets the right ones through.</p>
+      <div class="me-points">
+        <div><h3>Spam and scams screened out</h3><p>Sales calls turned away if you like. A suspected scam is noted with the reason, and what to do if you already paid.</p></div>
+        <div><h3>Your people always get through</h3><p>Put family on "Always ring me." Numbers on "Never answer" are turned away. Everyone else reaches your assistant.</p></div>
+        <div><h3>Messages worth reading</h3><p>Who called, their number, what it's about and whether it's urgent. A caller who claims an emergency is checked first, with your family code word if you set one.</p></div>
+        <div><h3>Creator mode</h3><p>Brand and sponsorship calls are taken down, never agreed to. Harassing calls are ended and flagged.</p></div>
+      </div>
+      <div class="mini" aria-label="Calls today, from the Personal app">
+        <div class="mini-row"><span class="n">Dave Patel</span><span class="tag">Message</span><span class="d">Saturday works, but can dinner move to 7? He has the kids until 6.</span></div>
+        <div class="mini-row"><span class="n">Linda Chen</span><span class="tag ok">Always rings</span><span class="d">On your always-ring list. Your phone rang.</span></div>
+        <div class="mini-row"><span class="n num">(857) 555-0190</span><span class="tag warn">Suspected scam</span><span class="d">Said your car warranty is expiring and asked for your card number. Your assistant ended the call.</span></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="features" id="features" aria-labelledby="features-title">
+  <div class="wrap features-inner">
+    <div class="section-head">
+      <h2 id="features-title">What it handles.</h2>
+      <p>The things a good front desk does, done the same way on every call.</p>
+    </div>
+
+    <div class="groups">
+      <div class="group">
+        <h3>On the call<small>What your callers get.</small></h3>
+        <ul class="items">
+          <li><strong>Your name, your greeting</strong><span>It answers as your business, with your hours and services, and plays the recording notice first.</span></li>
+          <li><strong>Your trade's questions</strong><span>The appliance and brand, the address, a good time. Each trade asks its own.</span></li>
+          <li><strong>Honest about what it is</strong><span>It never claims to be a person. Asked directly, it says it's your virtual assistant.</span></li>
+          <li><strong>The caller's language</strong><span>A caller who speaks Spanish or another language gets answers in it. Your notes are always in English.</span></li>
+          <li class="wide"><strong>Emergencies go to a person</strong><span>Your trade's emergency list, plus your own. It gives the safety step first, checks the problem is happening now, takes the address, then calls your on-call people in order until one presses 1. For a gas smell, it tells the caller to leave and call 911, and books nothing.</span></li>
+        </ul>
+      </div>
+
+      <div class="group">
+        <h3>When you step in<small>Pass calls around like a real office.</small></h3>
+        <div>
+          <ul class="items">
+            <li><strong>Several phones ring at once</strong><span>Choose who rings, on the app, a mobile number or both. The first to answer gets the call.</span></li>
+            <li><strong>Call back from the app</strong><span>Call a customer from your browser. They see your business number, not your cell.</span></li>
+            <li><strong>Hold, then pick it back up</strong><span>Put a caller on hold with music while you check something.</span></li>
+            <li><strong>Warm or blind transfers</strong><span>Talk to a teammate first, or send the call straight through. Try it below.</span></li>
+          </ul>
+          <div class="transfer-demo">
+            <div class="app compact">
+                <div class="panel live-card" id="live-card">
+                  <div class="top">
+                    <span class="who"><svg aria-hidden="true"><use href="#i-user"/></svg><span class="caller-num">(617) 555-0142</span></span>
+                    <span class="right"><span class="num">3:05</span><span class="tag ok"><span class="dot"></span>Live</span></span>
+                  </div>
+                  <p class="meta"><svg aria-hidden="true"><use href="#i-phone"/></svg><span id="xfer-on">On the call: Ana Rivera, on the app</span></p>
+                  <p class="status" id="xfer-status" aria-live="polite">Pass this call to Nina Brooks.</p>
+                  <div class="app-actions" id="xfer-actions"></div>
+                </div>
             </div>
-            <div class="title small">Today's insights</div>
-            <div class="inbox">
-              <div class="job slim">
-                <div class="job-top"><span class="label">Top requests</span><span class="when">12 calls today</span></div>
-                <div class="rows"><span>Dryer not heating</span><b>3</b><span>Fridge not cooling</span><b>2</b><span>Washer not spinning</span><b>2</b></div>
-              </div>
-              <div class="job slim">
-                <div class="job-top"><span class="label">Didn't book</span><span class="when">3 calls</span></div>
-                <div class="rows"><span>Wanted a price first</span><b>2</b><span>Outside your area</span><b>1</b></div>
-              </div>
-              <div class="job slim suggest">
-                <p class="job-what"><b>3 callers asked about installation this week.</b> Add it to your services?</p>
-              </div>
+            <div class="explain">
+              <p><strong>Warm:</strong> you talk to your teammate first while the caller hears hold music, then complete or cancel.</p>
+              <p><strong>Blind:</strong> the call goes straight to their app and phone. If nobody picks up, the receptionist or voicemail takes it. A caller is never dropped.</p>
             </div>
           </div>
         </div>
-        <figcaption>The home screen, as designed for launch. Shown with demo data.</figcaption>
-      </figure>
-    </div>
-  </section>
+      </div>
 
-  <section class="emergency" aria-labelledby="emergency">
-    <div class="wrap">
+      <div class="group">
+        <h3>After the call<small>What you get.</small></h3>
+        <ul class="items">
+          <li><strong>Every call on record</strong><span>Summary, full transcript and recording, with filters and search.</span></li>
+          <li><strong>A home screen that's a to-do list</strong><span>Requests to confirm, callers to return, what callers wanted, and which calls didn't book and why.</span></li>
+          <li><strong>A Monday email</strong><span>Last week's calls in a few numbers, every Monday morning. Turn it off any time.</span></li>
+          <li><strong>A sign-in for each person</strong><span>Technicians see only their own jobs and calls. The owner sees everything.</span></li>
+          <li><strong>Team chat</strong><span>A thread for each job, direct messages, and announcements for the whole team.</span></li>
+          <li><strong>Runs in your browser</strong><span>On your phone or your computer. Calls ring in the app while it's open.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="pricing" id="pricing" aria-labelledby="pricing-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="pricing-title">What it costs.</h2>
+      <p>Month to month. Try it first with a free demo call to your own phone.</p>
+    </div>
+
+    <div class="plans">
+      <div class="family me-plan">
+        <h3>Just for you</h3>
+        <div class="family-plans">
+          <div class="plan">
+            <h4>Personal</h4>
+            <p class="price"><b><sup>$</sup>11.99</b><span>a month</span></p>
+            <p class="for">For your own phone. Pay for calls as you go.</p>
+            <ul>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>$0.45 a minute from prepaid credit</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Top up from $20</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>1 sign-in</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Screening, messages and your ring lists</span></li>
+            </ul>
+            <a class="btn" data-app href="#get-started">Start with a demo call</a>
+          </div>
+        </div>
+      </div>
+      <div class="family biz-plans">
+        <h3>For a business</h3>
+        <div class="family-plans">
+          <div class="plan">
+            <h4>Business</h4>
+            <p class="price"><b><sup>$</sup>65</b><span>a month</span></p>
+            <p class="for">For a shop with one or two people on the phones.</p>
+            <ul>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>150 call minutes a month</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Then $0.39 a minute from prepaid credit</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>2 sign-ins</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Extra sign-ins $10 a month each</span></li>
+            </ul>
+            <a class="btn" data-app href="#get-started">Start with a demo call</a>
+          </div>
+          <div class="plan">
+            <h4>Growth</h4>
+            <p class="price"><b><sup>$</sup>119</b><span>a month</span></p>
+            <p class="for">For a team with people out in the field.</p>
+            <ul>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>400 call minutes a month</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Then $0.39 a minute from prepaid credit</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>5 sign-ins</span></li>
+              <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Extra sign-ins $10 a month each</span></li>
+            </ul>
+            <a class="btn" data-app href="#get-started">Start with a demo call</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc" id="calc">
       <div>
-        <h2 class="big" id="emergency">Emergencies break through to a person.</h2>
-        <div class="copy">
-          <p>Regular after-hours calls get a job request or a message for the morning. When a call is an emergency for your trade, your assistant alerts your on-call person right away, by call and text, even in the middle of the night.</p>
-          <p>You decide what counts as an emergency and who gets the alert.</p>
-        </div>
+        <h3>What would a month cost you?</h3>
+        <p class="hint">Every minute counts: calls the receptionist answers, calls your team takes in the app, and calls you make from it. Each call rounds up to the whole minute.</p>
       </div>
-      <ul aria-label="Examples of emergencies">
-        <li>Burst pipe</li>
-        <li>No heat in winter</li>
-        <li>Roof leaking into the house</li>
-        <li>Water pouring from an appliance</li>
-        <li>Gas smell<small>Callers are told to leave the building and call 911. Nothing gets booked.</small></li>
-      </ul>
+      <div>
+        <label for="minutes">Call minutes in a month <output class="minutes" id="minutes-out" for="minutes">200</output></label>
+        <input class="range" type="range" id="minutes" min="0" max="800" step="10" value="200">
+        <div class="range-scale" aria-hidden="true"><span>0</span><span>400</span><span>800</span></div>
+        <ul class="totals" id="totals">
+          <li data-plan="personal"><span class="p">Personal</span><span class="v">$101.99</span><span class="why">$11.99 plus 200 minutes of credit</span></li>
+          <li data-plan="business"><span class="p">Business</span><span class="v">$84.50</span><span class="why">50 minutes past the 150 included</span></li>
+          <li data-plan="growth"><span class="p">Growth</span><span class="v">$119.00</span><span class="why">Inside the 400 included</span></li>
+        </ul>
+      </div>
     </div>
-  </section>
 
-  <section class="languages" aria-labelledby="languages">
-    <div class="wrap">
-      <h2 class="big" id="languages">It answers in your caller's language.</h2>
-      <div class="copy"><p>It recognizes the caller's language in the first seconds and answers in it. It covers the 25 most spoken languages in the US. You see the transcript in the original language and in English.</p></div>
-      <p class="tongues" aria-label="Languages">
-        <span lang="es">Español</span>
-        <span lang="zh">中文</span>
-        <span lang="tl">Tagalog</span>
-        <span lang="vi">Tiếng Việt</span>
-        <span lang="ar" dir="rtl">العربية</span>
-        <span lang="fr">Français</span>
-        <span lang="ko">한국어</span>
-        <span lang="pt">Português</span>
-        <span lang="hi">हिन्दी</span>
-        <span lang="ru">Русский</span>
-        <span lang="ht">Kreyòl ayisyen</span>
-        <span lang="de">Deutsch</span>
-        <span lang="te">తెలుగు</span>
-        <span lang="ur" dir="rtl">اردو</span>
-        <span lang="fa" dir="rtl">فارسی</span>
-        <span lang="gu">ગુજરાતી</span>
-        <span lang="bn">বাংলা</span>
-        <span lang="ja">日本語</span>
-        <span lang="it">Italiano</span>
-        <span lang="pl">Polski</span>
-        <span lang="uk">Українська</span>
-        <span lang="ta">தமிழ்</span>
-        <span lang="pa">ਪੰਜਾਬੀ</span>
-        <span lang="el">Ελληνικά</span>
-        <span lang="ne">नेपाली</span>
-      </p>
-      <p class="fine">Plus English. You choose which languages your business answers in.</p>
+    <div class="good-to-know">
+      <div><h4>$10 of calls to start</h4><p>After your first payment we add $10 of call credit. It's for calls only and expires after 30 days.</p></div>
+      <div><h4>No free trial, a real demo</h4><p>Your number goes live once your first payment goes through. Before that, the demo rings your own phone: three calls, up to three minutes each.</p></div>
+      <div><h4>Minutes and credit</h4><p>Included minutes reset each month and don't roll over. Credit is prepaid, and auto top-up can add more when it runs low.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="features" aria-labelledby="features">
-    <div class="wrap">
-      <h2 class="big" id="features">Speaks your trade.</h2>
-      <div class="copy"><p>Appliance repair, HVAC, plumbing, electrical, roofing and more. Your assistant uses your trade's words and asks your trade's questions.</p></div>
-      <ul>
-        <li><strong>Answers 24/7</strong><span>Day, night, weekends and holidays, on your hours and rules.</span></li>
-        <li><strong>Insights after every call</strong><span>A short summary and whether you need to call back.</span></li>
-        <li><strong>A weekly digest</strong><span>Your week on the phone in a short email every Monday.</span></li>
-        <li><strong>Job requests you confirm</strong><span>Nothing goes on your calendar without your yes.</span></li>
-        <li><strong>Take over any call</strong><span>Jump into a live call from your phone with one tap.</span></li>
-        <li><strong>Android app and web dashboard</strong><span>Run your front desk from the truck or the office.</span></li>
-      </ul>
+<div class="light">
+<section class="faq" id="questions" aria-labelledby="faq-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="faq-title">Questions people ask first.</h2>
+      <p>The fastest way to judge the voice is the demo call. It rings your phone.</p>
     </div>
-  </section>
+    <div class="qa">
+      <details>
+        <summary>Does it sound like a robot?<span class="pm" aria-hidden="true"></span></summary>
+        <div class="a"><p>It talks in short turns at a normal pace, stops when the caller cuts in, and doesn't repeat the same question word for word. It never says "as an AI."</p><p>It also never pretends to be a person. If a caller asks, it says it's your virtual assistant.</p></div>
+      </details>
+      <details>
+        <summary>Can I keep my phone number?<span class="pm" aria-hidden="true"></span></summary>
+        <div class="a"><p>Yes. You get a new local number for the line, and you forward your current number to it. Setup shows the forwarding steps for Verizon, AT&amp;T, T-Mobile, office and home lines, plus a way that works with any phone company.</p><p>Nothing is ported, and no phone-company PIN is needed.</p></div>
+      </details>
+      <details>
+        <summary>What happens in an emergency?<span class="pm" aria-hidden="true"></span></summary>
+        <div class="a"><p>You choose what counts as an emergency, starting from your trade's list, and who's on call, in order. When a caller describes one, the receptionist gives the safety step first, checks it's happening now, and takes their name, number and address.</p><p>Then it calls your first on-call person, who presses 1 to take it. If they don't answer within about a minute, it tries the next person. It never promises the caller an arrival time.</p><p>By default this applies after hours. You can turn it on for any time of day.</p></div>
+      </details>
+      <details>
+        <summary>What if I run out of minutes or credit?<span class="pm" aria-hidden="true"></span></summary>
+        <div class="a"><p>On Business and Growth, calls past your included minutes use prepaid credit at $0.39 a minute. You get an email when credit runs low, and auto top-up can add more for you. If minutes and credit both run out, callers reach a plain voicemail until you top up.</p><p>On Personal, every call uses credit at $0.45 a minute. When about a minute is left on a call, your assistant says so, and it ends the call politely when credit runs out.</p></div>
+      </details>
+      <details>
+        <summary>Can a caller talk to a real person?<span class="pm" aria-hidden="true"></span></summary>
+        <div class="a"><p>Yes, if you want that. Turn on transfers, and during your hours the receptionist takes the caller's name and number, then rings the phones you chose. If nobody can pick up, it takes a message.</p><p>Your team can also pass any live call to each other, warm or blind.</p></div>
+      </details>
+      <details>
+        <summary>Are calls recorded?<span class="pm" aria-hidden="true"></span></summary>
+        <div class="a"><p>Every answered call starts with a recording notice. If the caller doesn't agree, nothing is kept.</p><p>Recordings play from the call's page, next to the transcript, and are kept for a year. You can delete one sooner.</p></div>
+      </details>
+      <details>
+        <summary>Will it put jobs on my calendar?<span class="pm" aria-hidden="true"></span></summary>
+        <div class="a"><p>No. Every request lands in your inbox as "Needs confirmation." You confirm, edit, assign or decline it. Nothing is scheduled on its own, and confirming never texts the customer.</p></div>
+      </details>
+      <details>
+        <summary>Is there a free trial?<span class="pm" aria-hidden="true"></span></summary>
+        <div class="a"><p>No trial, but a free demo. Sign up, tell it how your calls should be answered, and it calls your phone. You play a customer and it plays your receptionist. You get three demo calls of up to three minutes each, and the transcript of each one.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="closer" id="get-started" aria-labelledby="closer-title">
+  <div class="wrap">
+    <h2 id="closer-title">Hear it answer your phone.</h2>
+    <p>Sign up, answer a few questions about how your calls should go, and the demo rings your phone. You play the customer.</p>
+    <div class="ctas">
+      <a class="btn" data-app href="#get-started" id="closer-cta"><svg aria-hidden="true"><use href="#i-phone"/></svg>Get a demo call</a>
+      <a class="link" data-app href="#get-started">Already signed up? Sign in</a>
+    </div>
+  </div>
+</section>
+
 </main>
 
-<footer>
+<footer class="site-foot">
   <div class="wrap">
-    <span><b>Every Call Covered</b></span>
-    <span>&copy; 2026 Every Call Covered</span>
+    <div>
+      <a class="brand" href="/" aria-label="Every Call Covered, home"><svg aria-hidden="true"><use href="#i-mark"/></svg><span>Every Call Covered</span></a>
+      <p class="copy">&copy; 2026 Every Call Covered</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="#the-call">How it answers</a></li>
+        <li><a href="#who">Who it's for</a></li>
+        <li><a href="#features">What it handles</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a data-app href="#get-started">Sign in</a></li>
+      </ul>
+    </nav>
   </div>
 </footer>
+
+
+<script src="/assets/site.js" defer></script>
 </body>
 </html>
