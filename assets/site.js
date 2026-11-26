@@ -25,6 +25,8 @@
     menuBtn.addEventListener("click", () => setMenu(menu.hidden));
     menu.addEventListener("click", e => { if (e.target.closest("a")) setMenu(false); });
     document.addEventListener("keydown", e => { if (e.key === "Escape" && !menu.hidden) { setMenu(false); menuBtn.focus(); } });
+    document.addEventListener("click", e => { if (!menu.hidden && !e.target.closest(".site-head")) setMenu(false); });
+    window.matchMedia("(min-width: 900px)").addEventListener("change", e => { if (e.matches) setMenu(false); });
   }
 
   // ---- The overnight log arrives row by row, once ----
@@ -44,6 +46,7 @@
     const render = () => {
       const m = Number(range.value);
       out.textContent = m.toLocaleString("en-US");
+      range.setAttribute("aria-valuetext", `${m} minutes`);
       range.style.setProperty("--fill", (m / Number(range.max)) * 100 + "%");
       const totals = {};
       for (const [id, p] of Object.entries(PRICES)) {
@@ -72,8 +75,10 @@
     };
     const set = (text, onCall, buttons) => {
       clearTimeout(timer);
+      const hadFocus = xfer.contains(document.activeElement);
       status.textContent = text; on.textContent = onCall;
       xfer.replaceChildren(...buttons);
+      if (hadFocus) buttons[0].focus();
     };
     const start = () => set("Pass this call to Nina Brooks.", "On the call: Ana Rivera, on the app", [
       btn("Warm transfer", "", warm), btn("Blind transfer", "outline", blind),
@@ -230,7 +235,7 @@
   const line = $("#line"), lineState = $("#line-state"), lineWho = $("#line-who"), lineNum = $("#line-num");
   const clock = $("#clock"), transcript = $("#transcript"), appMain = $("#app-main"), appNav = $("#app-nav");
   const appBiz = $("#app-biz"), appBizTop = $("#app-biz-top"), progress = $("#progress"), chaptersEl = $("#chapters");
-  const playBtn = $("#play"), announce = $("#announce"), stage = $("#stage");
+  const playBtn = $("#play"), announce = $("#announce"), stage = $("#stage"), toApp = $("#to-app");
   const tabs = $$('[role="tab"]', player);
 
   let sc = SCENARIOS.repair, scId = "repair";
@@ -262,6 +267,7 @@
     if (state === "idle") { lineWho.textContent = sc.lineName; lineNum.textContent = sc.lineSub; }
     else { lineWho.textContent = state === "ringing" ? "Incoming call" : sc.answeredBy; lineNum.textContent = sc.num; }
     if (state !== "live") delete line.dataset.speaking;
+    toApp.textContent = state === "ended" ? "See where it landed" : "See the app";
   };
 
   const setApp = (html, animate) => {
@@ -451,17 +457,17 @@
   tabs.forEach((t, i) => {
     t.addEventListener("click", () => load(t.dataset.scenario, true));
     t.addEventListener("keydown", e => {
-      const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-      if (!d) return;
+      const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+      if (to === undefined) return;
       e.preventDefault();
-      tabs[(i + d + tabs.length) % tabs.length].focus();
+      tabs[(to + tabs.length) % tabs.length].focus();
     });
   });
 
   playBtn.addEventListener("click", () => {
     if (status === "playing") {
       token++;
-      if (bubble && !bubble.classList.contains("sys") && stepIndex < sc.steps.length) bubble.remove();
+      if (bubble && stepIndex < sc.steps.length) bubble.remove();
       delete line.dataset.speaking;
       setPlayButton("paused");
     } else if (status === "paused") {
@@ -481,8 +487,35 @@
     new ResizeObserver(() => { if (line.dataset.state === "ended") transcript.scrollTop = transcript.scrollHeight; }).observe(transcript);
   }
 
-  $("#to-app").addEventListener("click", () => {
-    $("#app").scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "start" });
+  // The app panel keeps the height of its tallest screen, so the page below never moves while a call plays.
+  const sizer = document.createElement("div");
+  sizer.className = "app-main app-sizer";
+  sizer.setAttribute("aria-hidden", "true");
+  sizer.inert = true;
+  appMain.after(sizer);
+  let sizedAt = 0;
+  const fitApp = () => {
+    const w = appMain.clientWidth;
+    if (!w || w === sizedAt) return;
+    sizedAt = w;
+    let h = 0;
+    for (const s of Object.values(SCENARIOS)) {
+      for (const view of [s.during("idle"), s.during("ringing"), s.during("live"), s.after()]) {
+        sizer.innerHTML = view;
+        h = Math.max(h, sizer.offsetHeight);
+      }
+    }
+    sizer.innerHTML = "";
+    appMain.style.minHeight = Math.ceil(h) + "px";
+  };
+  fitApp();
+  if ("ResizeObserver" in window) new ResizeObserver(fitApp).observe(stage);
+  document.fonts?.ready.then(() => { sizedAt = 0; fitApp(); });
+
+  toApp.addEventListener("click", () => {
+    const app = $("#app");
+    app.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "start" });
+    app.focus({ preventScroll: true });
   });
 
   appMain.addEventListener("click", e => {
